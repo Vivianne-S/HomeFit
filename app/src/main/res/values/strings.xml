@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">HomeFit</string>
+    <string name="welcome_message_journey">Your Fitness Journey Begins</string>
+    <string name="welcome_message_with">with</string>
+    <string name="welcome_message_homefit">HomeFit</string>
+    <string name="username_input">Full Name</string>
+    <string name="user_email_input">Email</string>
+    <string name="user_password_input">Password (at least 6 character long)"</string>
+    <string name="user_signup_buttontext">Sign Up</string>
+    <string name="user_already_have_an_account_linktext">Already have an account? Sign In</string>
+    <string name="user_signin_buttontext">Sign In</string>
+    <string name="user_forgot_password_linktext">Forgot Password?</string>
+    <string name="user_reset_password_buttontext">Reset Password</string>
+    <string name="user_back_to_sign_in_linktext">Back to Sign In</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="tap_the_screen_to_continue">Tap the Screen to Continue</string>
+    <string name="user_age_input">Age</string>
+
 </resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/splashFragment"> <!-- Startfragmentet när appen öppnas -->
+
+    <!-- Splash Fragment: Välkomstskärm som visas först -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.homefit.ui.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment" /> <!-- Navigera till SignInFragment efter splash-skärmen -->
+    </fragment>
+
+    <!-- Sign In Fragment: Inloggningssidan -->
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.homefit.ui.signin.SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" /> <!-- Navigera till SignUpFragment för att skapa ett konto -->
+        <action
+            android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" /> <!-- Navigera till ForgotPasswordFragment för att återställa lösenordet -->
+    </fragment>
+
+    <!-- Sign Up Fragment: Registreringssidan -->
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.homefit.ui.signup.SignUpFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" /> <!-- Navigera tillbaka till SignInFragment efter registrering -->
+    </fragment>
+
+    <!-- Forgot Password Fragment: Sidan för att återställa lösenord -->
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.homefit.ui.forgotpassword.ForgotPasswordFragment"
+        tools:layout="@layout/fragment_forgot_password">
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" /> <!-- Navigera tillbaka till SignInFragment efter att ha återställt lösenordet -->
+    </fragment>
+
+</navigation>

@@ -8,36 +8,33 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
-    // Skapa en instans av ViewBinding för att länka layoutkomponenterna
+    // Bindings för att hantera layouten och navigationskontrollen för appens fragment
     private lateinit var binding: ActivityMainBinding
-
-    // Deklarera en NavController för att hantera navigeringen mellan fragment
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //ViewBinding för att binda layouten till aktivitetens vy
+        // Inflaterar layouten och binder den till aktiviteten
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Sätt Toolbar som ActionBar för att visa navigationselement
+        // Sätt upp Toolbar som ActionBar för att visa navigationsknappar
         setSupportActionBar(binding.toolbar)
 
-        // Hämta NavHostFragment från layouten där fragmenten ska bytas ut
+        // Hitta NavHostFragment som kommer att hålla fragmenten som byts ut
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        // Få navController från NavHostFragment för att kunna hantera navigationen
+        // Få NavController från NavHostFragment för att kunna hantera navigation
         navController = navHostFragment.navController
 
         // Koppla ActionBar till navigation controller
         setupActionBarWithNavController(navController)
     }
 
-    // Hantera navigeringen när användaren trycker på skärmen
+    // Hantera navigeringen när användaren trycker på tillbaka-knappen i ActionBar
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

@@ -1,7 +1,6 @@
 package com.example.homefit.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,18 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignUpBinding
-
-
+import com.example.homefit.ui.viewmodelauth.AuthViewModel
 
 class SignUpFragment : Fragment() {
 
+    // Binding för att hantera fragmentets layout från xml
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SignUpViewModel by viewModels()  // Se till att rätt ViewModel används
+
+    // AuthViewModel för logiken / felmedelanden
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
@@ -31,46 +31,33 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("SignUpFragment", "Fragment loaded successfully")
+        // Observera Toast meddelanden från AuthViewModel
+        authViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        }
 
+        // Klicklyssnare för registreringsknappen som hämtar e-post och lösenord
         binding.btnSignUp.setOnClickListener {
-            Log.d("SignUpFragment", "Sign Up button clicked")
-
-            val username = binding.etUsername.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            // Kollar om något av fälten är tomt
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "All fields are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // Anropar signUp funktionen i ViewModel och hanterar resultatet
-            viewModel.signUp(username, email, password) { success, errorMessage ->
+            // Anropa signUp funktionen från AuthViewModel
+            authViewModel.signUp(email, password) { success, errorMessage ->
                 if (success) {
-                    Toast.makeText(requireContext(), "Account created! Please sign in.", Toast.LENGTH_SHORT).show()
-                    Log.d("SignUpFragment", "Navigating to SignInFragment")
                     findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
-                } else {
-                    // Visar specifikt meddelande om lösenordet är för kort
-                    if (errorMessage == "Password must be at least 6 characters long") {
-                        Toast.makeText(requireContext(), "Password must be at least 6 characters long", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Signup failed: $errorMessage", Toast.LENGTH_LONG).show()
-                    }
-                    Log.e("SignUpFragment", "Signup failed: $errorMessage")
                 }
             }
         }
 
-        // Navigerar till inloggningssidan när användaren klickar på "Sign In"
+        // Navigera till inloggningssidan via länken Already have an account?
         binding.tvSignIn.setOnClickListener {
-            Log.d("SignUpFragment", "Navigating to SignInFragment")
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
     }
 
+    // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

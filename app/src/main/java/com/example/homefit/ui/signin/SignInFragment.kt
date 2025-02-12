@@ -10,14 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignInBinding
-import com.example.homefit.ui.signin.SignInViewModel
-
+import com.example.homefit.ui.viewmodelauth.AuthViewModel
 
 class SignInFragment : Fragment() {
 
+    // Binding för att hantera fragmentets layout från xml
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SignInViewModel by viewModels()
+
+    // AuthViewModel för logiken / felmedelanden
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,58 +31,41 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Hantera inloggning
+        // Om inloggningen lyckades
+        authViewModel.isAuthenticated.observe(viewLifecycleOwner) { isAuthenticated ->
+            if (isAuthenticated) {
+                // TODO: Navigera till HomeFragment när autentiseringen är lyckad
+                // FindNavController kommer att navigera till hemsidan när användaren loggar in
+                // findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+            }
+        }
+
+        // Observera felmeddelanden från AuthViewModel och visa dem som Toast
+        authViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Klicklyssnare för registreringsknappen som hämtar e-post och lösenord
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            // Kontrollera om email eller lösen är tomt
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in both email and password", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // Anropa sign-in funktionen från ViewModel
-            viewModel.signIn(email, password)
+            // Anropa signIn funktionen från AuthViewModel
+            authViewModel.signIn(email, password)
         }
 
-        // Navigerar till registreringssidan
         binding.btnSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
-        // Navigerar till glömt lösenord-sidan
         binding.btnForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
         }
-
-        // Kollar om användaren är autentiserad
-        viewModel.isAuthenticated.observe(viewLifecycleOwner) { isAuthenticated ->
-            if (isAuthenticated) {
-
-
-                //  homefragment behöver skapas så man tar sig vidare när man loggat in!
-
-                // Navigera till huvudsidan om inloggningen är framgångsrik, homefragment behöver skapas!
-              //findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-
-
-
-
-            } else {
-                // Visa felmeddelande om inloggningen misslyckas
-                Toast.makeText(requireContext(), "Sign-in failed", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        // Kollar felmeddelanden från ViewModel
-        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            errorMessage?.let {
-                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
+    // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

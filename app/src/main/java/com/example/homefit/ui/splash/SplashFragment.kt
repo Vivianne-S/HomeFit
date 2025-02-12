@@ -1,25 +1,21 @@
 package com.example.homefit.ui.splash
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSplashBinding
-import com.example.homefit.ui.splash.SplashViewModel
-
 
 class SplashFragment : Fragment() {
 
-    // ViewBinding för att hantera UI-element i fragmentet
+    // Binding för att hantera fragmentets layout från xml
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
-
-    // ViewModel för att hantera logik och UI-uppdateringar
-    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -31,29 +27,39 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observera om "Journey"-texten ska visas
-        viewModel.showJourneyText.observe(viewLifecycleOwner) { show ->
-            binding.tvJourney.visibility = if (show) View.VISIBLE else View.GONE
-        }
+        _binding?.let { binding ->
+            // Döljer texten från början för att visa dom en efter en med en handler
+            binding.tvJourney.visibility = View.INVISIBLE
+            binding.tvWith.visibility = View.INVISIBLE
+            binding.tvHomeFit.visibility = View.INVISIBLE
 
-        // Observera om "With"-texten ska visas
-        viewModel.showWithText.observe(viewLifecycleOwner) { show ->
-            binding.tvWith.visibility = if (show) View.VISIBLE else View.GONE
-        }
+            val handler = Handler(Looper.getMainLooper())
 
-        // Observera om "HomeFit"-texten ska visas
-        viewModel.showHomeFitText.observe(viewLifecycleOwner) { show ->
-            binding.tvHomeFit.visibility = if (show) View.VISIBLE else View.GONE
-        }
+            // Visar Journey texten efter 1.5 sekunder
+            handler.postDelayed({
+                binding.tvJourney.visibility = View.VISIBLE
+            }, 1500)
 
-        // Navigera till inloggningsskärmen när användaren klickar på skärmen
-        binding.root.setOnClickListener {
-            findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+            // Visar With texten efter 2.1 sekunder
+            handler.postDelayed({
+                binding.tvWith.visibility = View.VISIBLE
+            }, 2100)
+
+            // Visar HomeFit texten efter 2.6 sekunder
+            handler.postDelayed({
+                binding.tvHomeFit.visibility = View.VISIBLE
+            }, 2600)
+
+            // Navigerar till inloggningssidan när användaren klickar på skärmen
+            binding.root.setOnClickListener {
+                findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+            }
         }
     }
 
+    // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // Undvik minnesläckor
+        _binding = null
     }
 }

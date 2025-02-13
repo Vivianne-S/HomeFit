@@ -12,6 +12,7 @@ import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignInBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
 
+
 class SignInFragment : Fragment() {
 
     // Binding för att hantera fragmentets layout från xml

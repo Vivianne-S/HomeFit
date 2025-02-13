@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignUpBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
@@ -17,6 +18,8 @@ class SignUpFragment : Fragment() {
     // Binding för att hantera fragmentets layout från xml
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
+    // LottieAnimationView
+    private lateinit var lottieAnimationView: LottieAnimationView
 
     // AuthViewModel för logiken / felmedelanden
     private val authViewModel: AuthViewModel by viewModels()
@@ -31,6 +34,11 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Hämta LottieAnimationView
+        lottieAnimationView = binding.lottieAnimationView
+
+        // Starta animationen
+        lottieAnimationView.playAnimation()
         // Observera Toast meddelanden från AuthViewModel
         authViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
             message?.let {

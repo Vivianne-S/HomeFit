@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentForgotPasswordBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
@@ -30,6 +31,9 @@ class ForgotPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Få referens till LottieAnimationView från binding
+        val lottieAnimationView: LottieAnimationView = binding.lottieForgotPassword
+
         // Observera eventuella felmeddelanden från ViewModel
         authViewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             if (!message.isNullOrEmpty()) {
@@ -41,8 +45,14 @@ class ForgotPasswordFragment : Fragment() {
         binding.btnForgotPassword.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
 
+            // Spela upp animationen under lösenordsåterställning
+            lottieAnimationView.playAnimation()
+
             // Observera felmeddelanden från AuthViewModel och visa dem som Toast
             authViewModel.resetPassword(email) { success, message ->
+                // Stoppa animationen när återställning är klar
+                lottieAnimationView.cancelAnimation()
+
                 if (success) {
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_forgotPasswordFragment_to_signInFragment)
@@ -56,6 +66,7 @@ class ForgotPasswordFragment : Fragment() {
             findNavController().navigate(R.id.action_forgotPasswordFragment_to_signInFragment)
         }
     }
+
     // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
     override fun onDestroyView() {
         super.onDestroyView()

@@ -47,5 +47,4 @@
             android:id="@+id/action_forgotPasswordFragment_to_signInFragment"
             app:destination="@id/signInFragment" /> <!-- Navigera tillbaka till SignInFragment efter att ha återställt lösenordet -->
     </fragment>
-
 </navigation>

@@ -120,4 +120,15 @@
     <string name="save_profile_button">Save Profile</string>
     <string name="profile_length_hint">Length (cm)</string>
 
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
+    <!-- Menyknappar -->
+    <string name="nav_home">Home</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_logout">Logout</string>
+
 </resources>

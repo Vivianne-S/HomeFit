@@ -46,6 +46,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.5.3") // Navigering
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1") // ViewModel
     implementation("androidx.room:room-runtime:2.5.0") // Room Database
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0") //Graph
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -16,8 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io")} //Graph
+        }
     }
-}
 
 rootProject.name = "HomeFit"
 include(":app")

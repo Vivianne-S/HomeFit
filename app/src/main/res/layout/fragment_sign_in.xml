@@ -7,16 +7,30 @@
     android:background="@drawable/app_background"
     tools:context=".ui.signin.SignInFragment">
 
+    <!-- Lottie Animation for background -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieSignInAnimation"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/sign_in_animation" />
+
     <!-- App Logo -->
     <ImageView
         android:id="@+id/ivAppLogo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="80dp"
         android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"
+      />
 
     <!-- Email Input -->
     <com.google.android.material.textfield.TextInputLayout
@@ -69,10 +83,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@color/logoblue"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/user_signin_buttontext"
-        android:backgroundTint="@color/logoblue"
         android:textColor="@android:color/white"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,10 +100,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/logoblue"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/user_signup_buttontext"
-        android:backgroundTint="@color/logoblue"
         android:textColor="@android:color/white"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.workout.WorkoutFragment"
+    android:padding="15dp"
+    android:background="@drawable/app_background">
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="69dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:text="Done"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_workout"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_workout"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/icon_chairdips"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton_video"
+        android:layout_width="37dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="72dp"
+        android:background="remove"
+        android:src="@drawable/baseline_play_circle_outline_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintStart_toEndOf="@+id/imageView_workout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton_favorite"
+        android:layout_width="37dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="4dp"
+        android:background="remove"
+        android:src="@drawable/baseline_favorite_border_24"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton_video"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.441" />
+
+    <TextView
+        android:id="@+id/workout_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:text="Chair Dips"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/workout_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_workout"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/workout_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:paddingHorizontal="20dp"
+        android:text="workoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescription"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_workout"
+        app:layout_goneMarginTop="15dp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/stop_timer_btn"
+            android:textColor="@color/white"
+            android:background="remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            tools:layout_editor_absoluteX="39dp"
+            tools:layout_editor_absoluteY="588dp"
+            android:layout_marginHorizontal="15dp"
+            />
+
+
+        <TextView
+            android:id="@+id/timer_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02.24"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="611dp" />
+
+        <Button
+            android:id="@+id/start_timer_btn"
+            android:text="Stop"
+            android:background="remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="228dp"
+            tools:layout_editor_absoluteY="583dp"
+            android:layout_marginHorizontal="15dp"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

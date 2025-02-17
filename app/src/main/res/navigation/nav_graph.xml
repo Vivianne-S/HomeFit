@@ -57,6 +57,9 @@
         android:name="com.example.homefit.ui.categories.CategoriesFragment"
         tools:layout="@layout/fragment_categories">
         <!-- //TODO Lägg till fragment för Exercises och navigera till den här -->
+        <action
+            android:id="@+id/action_categoriesFragment_to_exercisesFragment"
+            app:destination="@id/exercisesFragment" />
     </fragment>
     <!-- Exercises Fragment: Sidan med övningar -->
     <fragment

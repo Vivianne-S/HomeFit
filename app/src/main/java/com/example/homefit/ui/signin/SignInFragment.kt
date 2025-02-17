@@ -13,12 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignInBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
-
-
 class SignInFragment : Fragment() {
 
     private lateinit var authViewModel: AuthViewModel
-    private var binding: FragmentSignInBinding? = null // Ändra till nullable binding
+    private var binding: FragmentSignInBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +26,13 @@ class SignInFragment : Fragment() {
         authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         binding = FragmentSignInBinding.inflate(inflater, container, false)
 
+        // Kolla om användaren redan är inloggad
+        authViewModel.checkIfUserIsLoggedIn()
+
         // Lyssna på autentiseringens status
         authViewModel.isAuthenticated.observe(viewLifecycleOwner, Observer { isAuthenticated ->
             if (isAuthenticated) {
-                // Navigera till CategoriesFragment när inloggningen lyckas
+                // Navigera till CategoriesFragment om användaren redan är inloggad
                 findNavController().navigate(R.id.action_signInFragment_to_categoriesFragment)
             }
         })
@@ -83,4 +84,3 @@ class SignInFragment : Fragment() {
         binding = null
     }
 }
-

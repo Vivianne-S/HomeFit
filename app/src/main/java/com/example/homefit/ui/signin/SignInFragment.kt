@@ -1,76 +1,86 @@
 package com.example.homefit.ui.signin
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignInBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
 
+
 class SignInFragment : Fragment() {
 
-    // Binding för att hantera fragmentets layout från xml
-    private var _binding: FragmentSignInBinding? = null
-    private val binding get() = _binding!!
-
-    // AuthViewModel för logiken / felmedelanden
-    private val authViewModel: AuthViewModel by viewModels()
+    private lateinit var authViewModel: AuthViewModel
+    private var binding: FragmentSignInBinding? = null // Ändra till nullable binding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        // Skapar och binder layouten för fragmentet
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Initialisera ViewModel
+        authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Om inloggningen lyckades, observerar förändring i autentiseringstillstånd
-        authViewModel.isAuthenticated.observe(viewLifecycleOwner) { isAuthenticated ->
+        // Lyssna på autentiseringens status
+        authViewModel.isAuthenticated.observe(viewLifecycleOwner, Observer { isAuthenticated ->
             if (isAuthenticated) {
-                // TODO: Navigera till HomeFragment när autentiseringen är lyckad
-                // findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                // Navigera till CategoriesFragment när inloggningen lyckas
+                findNavController().navigate(R.id.action_signInFragment_to_categoriesFragment)
             }
-        }
-
-        // Observerar felmeddelanden från AuthViewModel och visar dem som Toast
-        authViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-            }
-        }
+        })
 
         // Klicklyssnare för inloggningsknappen
-        binding.btnSignIn.setOnClickListener {
-            // Hämtar e-post och lösenord från användarens inmatning
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
+        binding?.btnSignIn?.setOnClickListener {
+            val email = binding?.etEmail?.text.toString()
+            val password = binding?.etPassword?.text.toString()
 
-            // Anropar signIn-funktionen från AuthViewModel
-            authViewModel.signIn(email, password)
+            // Kontrollera att fält inte är tomma
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                Toast.makeText(requireContext(), "Please enter both email and password", Toast.LENGTH_SHORT).show()
+            } else {
+                // Försök logga in användaren
+                authViewModel.signIn(email, password)
+            }
         }
 
-        // Navigering till signUpFragment när användaren klickar på Sign Up-knappen
-        binding.btnSignUp.setOnClickListener {
+        // Navigera till signUpFragment
+        binding?.btnSignUp?.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
-        // Navigering till forgotPasswordFragment när användaren klickar på Forgot Password-länken
-        binding.btnForgotPassword.setOnClickListener {
+        // Navigera till forgotPasswordFragment
+        binding?.btnForgotPassword?.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
         }
+
+        // Hantera felmeddelanden från ViewModel
+        authViewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            }
+        })
+
+        // Hantera toast-meddelanden
+        authViewModel.toastMessage.observe(viewLifecycleOwner, Observer { toastMessage ->
+            toastMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        return binding?.root
     }
 
-    // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
+    // Hantera rensning av binding när fragmentet förstörs och förhindra minnesläckor
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 }
+

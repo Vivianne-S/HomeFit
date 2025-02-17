@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" /> <!-- Navigera till ForgotPasswordFragment för att återställa lösenordet -->
+        <action
+            android:id="@+id/action_signInFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" /> <!-- Navigera till CategoriesFragment när inloggningen lyckas -->
     </fragment>
 
     <!-- Sign Up Fragment: Registreringssidan -->
@@ -47,4 +50,20 @@
             android:id="@+id/action_forgotPasswordFragment_to_signInFragment"
             app:destination="@id/signInFragment" /> <!-- Navigera tillbaka till SignInFragment efter att ha återställt lösenordet -->
     </fragment>
+
+    <!-- Categories Fragment: Kategorisidan -->
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.example.homefit.ui.categories.CategoriesFragment"
+        tools:layout="@layout/fragment_categories">
+        <!-- //TODO Lägg till fragment för Exercises och navigera till den här -->
+    </fragment>
+    <!-- Exercises Fragment: Sidan med övningar -->
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.example.homefit.ui.exercises.ExercisesFragment"
+        tools:layout="@layout/fragment_exercises">
+        <!-- Lägg till handlingar om du behöver navigera från ExercisesFragment till andra fragment -->
+    </fragment>
+
 </navigation>

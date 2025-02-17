@@ -57,6 +57,7 @@ class SplashFragment : Fragment() {
         }
     }
 
+
     // Rensar upp bindingen för att förhindra minnesläckor när vyn förstörs
     override fun onDestroyView() {
         super.onDestroyView()

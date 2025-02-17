@@ -61,8 +61,12 @@ class AuthViewModel : ViewModel() {
     // Registrera en ny användare
     fun signUp(email: String, password: String, callback: (Boolean, String?) -> Unit) {
         if (email.isEmpty() || password.length < 6) {
-            _toastMessage.value = "Email cannot be empty and password must be at least 6 characters long."
-            callback(false, "Email cannot be empty and password must be at least 6 characters long.")
+            _toastMessage.value =
+                "Email cannot be empty and password must be at least 6 characters long."
+            callback(
+                false,
+                "Email cannot be empty and password must be at least 6 characters long."
+            )
             return
         }
 
@@ -92,7 +96,10 @@ class AuthViewModel : ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("AuthViewModel", "Password reset email sent to $email")
-                    callback(true, "Password reset email sent successfully. Please check your inbox, including the spam folder.")
+                    callback(
+                        true,
+                        "Password reset email sent successfully. Please check your inbox, including the spam folder."
+                    )
                 } else {
                     val exceptionMessage = handleError(task.exception)
                     Log.e("AuthViewModel", "Failed to send password reset email: $exceptionMessage")
@@ -100,4 +107,21 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
+
+    // Logga ut användaren
+    fun signOut() {
+        auth.signOut()
+        _isAuthenticated.value = false
+    }
+
+    // Kollar om användaren är redan inloggad
+    fun checkIfUserIsLoggedIn() {
+        val user = auth.currentUser
+        if (user != null) {
+            _isAuthenticated.value = true
+        } else {
+            _isAuthenticated.value = false
+        }
+    }
 }
+

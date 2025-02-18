@@ -8,15 +8,6 @@
     tools:context=".ui.profile.ProfileFragment">
 
 
-    <!-- AppBarLayout med Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
-
-
     <!-- Innehållet i fragmentet -->
     <ScrollView
         android:layout_width="match_parent"

@@ -8,123 +8,119 @@
     android:padding="15dp"
     android:background="@drawable/app_background">
 
-
+    <!-- CheckBox for "Done" -->
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/workout_done"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView_workout"
         app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="60dp" />
 
+    <!-- Workout Image -->
     <ImageView
         android:id="@+id/imageView_workout"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/icon_chairdips"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp" />
 
-
+    <!-- Video Button -->
     <ImageButton
         android:id="@+id/imageButton_video"
         android:layout_width="37dp"
         android:layout_height="38dp"
-        android:layout_marginTop="72dp"
         android:src="@drawable/baseline_play_circle_outline_24"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
         app:layout_constraintStart_toEndOf="@+id/imageView_workout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.981"
+        android:layout_marginTop="72dp" />
 
-
+    <!-- Favorite Button -->
     <ImageButton
         android:id="@+id/imageButton_favorite"
         android:layout_width="37dp"
         android:layout_height="38dp"
-        android:layout_marginEnd="4dp"
         android:src="@drawable/baseline_favorite_border_24"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton_video"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton_video"
+        app:layout_constraintVertical_bias="0.441"
+        android:layout_marginEnd="4dp" />
 
+    <!-- Workout Name -->
     <TextView
         android:id="@+id/workout_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="8dp"
         android:text="Chair Dips"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/workout_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_workout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/workout_description"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Workout Description -->
     <TextView
         android:id="@+id/workout_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
-        android:paddingHorizontal="20dp"
-        android:text="workoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescriptionworkoutdescription"
-        android:textAlignment="center"
+        android:text="@string/workout_description"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/workout_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_workout"
-        app:layout_goneMarginTop="15dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="20dp" />
 
-
+    <!-- Timer and Control Buttons -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginBottom="30dp">
 
+        <!-- Start Timer Button -->
         <Button
             android:id="@+id/stop_timer_btn"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start"
-            tools:layout_editor_absoluteX="39dp"
-            tools:layout_editor_absoluteY="588dp"
-            android:layout_marginHorizontal="15dp"
-            />
+            android:text="@string/workout_timer_start"
+            android:layout_marginHorizontal="15dp" />
 
+            <!-- Timer Text -->
+            <TextView
+                android:id="@+id/timer_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workout_timer"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/timer_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="02.24"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            tools:layout_editor_absoluteX="163dp"
-            tools:layout_editor_absoluteY="611dp" />
-
+        <!-- Stop Timer Button -->
         <Button
             android:id="@+id/start_timer_btn"
-            android:text="Stop"
+            android:text="@string/workout_timer_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="228dp"
-            tools:layout_editor_absoluteY="583dp"
-            android:layout_marginHorizontal="15dp"
-            />
+            android:layout_marginHorizontal="15dp" />
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.constraintlayout.widget.ConstraintLayout>

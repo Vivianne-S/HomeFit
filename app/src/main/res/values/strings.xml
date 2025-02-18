@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name -->
     <string name="app_name">HomeFit</string>
@@ -22,7 +23,6 @@
     <string name="tap_the_screen_to_continue">Tap the Screen to Continue</string>
     <string name="user_age_input">Age</string>
 
-
     <!-- Profile Fragment Strings -->
     <string name="profile_name_hint">Your Name</string>
     <string name="profile_age_hint">Age</string>
@@ -43,8 +43,29 @@
     <string name="nav_calendar">Calendar</string>
     <string name="nav_logout">Logout</string>
 
+    <!-- Categories Strings -->
+    <string name="category_arms">Arms Exercises</string>
+    <string name="category_legs">Legs Exercises</string>
+    <string name="category_chest">Chest Exercises</string>
+    <string name="category_back">Back Exercises</string>
+    <string name="category_core">Core Exercises</string>
 
+    <!-- Workout Fragment Strings -->
+    <string name="workout_done">Done</string>
+    <string name="workout_description">Workout description will go here...</string>
+    <string name="workout_timer_start">Start</string>
+    <string name="workout_timer_stop">Stop</string>
 
+    <!-- Timer Text -->
+    <string name="workout_timer">Timer</string>
 
+    <!-- Workout Name -->
+    <string name="workout_name">Chair Dips</string>
+
+    <!-- Category Layout Strings -->
+    <string name="category_name">Chair Dips</string>
+
+    <!-- Category Image -->
+    <string name="category_image_description">Chair Dips icon</string>
 
 </resources>

@@ -96,7 +96,7 @@
 
             <TextView
                 android:id="@+id/tv_category_legs"
-                android:text="Legs Exercises"
+                android:text="@string/category_legs"
                 android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -149,7 +149,7 @@
 
             <TextView
                 android:id="@+id/tv_category_chest"
-                android:text="Chest Exercises"
+                android:text="@string/category_chest"
                 android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -201,7 +201,7 @@
 
             <TextView
                 android:id="@+id/tv_category_back"
-                android:text="Back Exercises"
+                android:text="@string/category_back"
                 android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -253,7 +253,7 @@
 
             <TextView
                 android:id="@+id/tv_category_core"
-                android:text="Core Exercises"
+                android:text="@string/category_core"
                 android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -18,9 +18,31 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="HomeFit"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Tillbaka-knapp (vänster sida) -->
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Gå tillbaka"
+                android:padding="8dp"
+                android:layout_gravity="start"/>
+
+            <!-- Hamburgermenyn (höger sida) -->
+            <ImageButton
+                android:id="@+id/menu_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_menu"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Öppna meny"
+                android:padding="8dp"
+                android:layout_gravity="end"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <!-- NavHostFragment (Fragment for navigation) -->
         <androidx.fragment.app.FragmentContainerView
@@ -42,4 +64,5 @@
         android:layout_gravity="start"
         android:background="@color/white"
         app:menu="@menu/main_menu"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -8,13 +8,21 @@
     tools:context=".ui.profile.ProfileFragment">
 
 
+    <!-- AppBarLayout med Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@android:color/white"></androidx.appcompat.widget.Toolbar>
+
 
     <!-- Innehållet i fragmentet -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="16dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,6 +52,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
+
                     <TextView
                         android:id="@+id/textViewName"
                         android:layout_width="wrap_content"
@@ -53,17 +62,6 @@
                         android:text="@string/profile_name_hint"
                         android:textColor="@color/logoblue"
                         android:textSize="30sp" />
-
-                    <EditText
-                        android:id="@+id/editTextAge"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_age_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/editTextGender"
@@ -76,12 +74,36 @@
                         android:textSize="12sp" />
 
                     <EditText
+                        android:id="@+id/editTextAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/profile_age_hint"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:textSize="12sp" />
+
+
+                    <EditText
                         android:id="@+id/editTextWeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/profile_weight_hint"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:textSize="12sp" />
+
+
+                    <EditText
+                        android:id="@+id/editTextLength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/profile_length_hint"
                         android:inputType="number"
                         android:padding="12dp"
                         android:textSize="12sp" />
@@ -93,17 +115,6 @@
                         android:layout_marginBottom="5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/profile_goal_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
-
-                    <EditText
-                        android:id="@+id/editTextLength"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_length_hint"
                         android:inputType="number"
                         android:padding="12dp"
                         android:textSize="12sp" />

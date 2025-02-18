@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
         barChart = binding.WeightBarChart
 
         // Lottie-animation
-        val exerciseAnimation = binding.exerciseAnimation // Koppling till LottieAnimationView
+        val exerciseAnimation = binding.exerciseAnimation
 
         // Ladda in existerande data från ViewModel
         viewModel.name.observe(viewLifecycleOwner) { textViewName.text = it }
@@ -56,6 +56,7 @@ class ProfileFragment : Fragment() {
         viewModel.gender.observe(viewLifecycleOwner) { editTextGender.setText(it) }
         viewModel.weight.observe(viewLifecycleOwner) { editTextWeight.setText(it) }
         viewModel.goal.observe(viewLifecycleOwner) { editTextGoal.setText(it) }
+        viewModel.length.observe(viewLifecycleOwner) { editTextLength.setText(it) }
 
         viewModel.loadProfile() // Ladda in användarens profil
         setupBarChart() // Ställ in diagrammet
@@ -67,9 +68,9 @@ class ProfileFragment : Fragment() {
             val gender = editTextGender.text.toString()
             val weight = editTextWeight.text.toString()
             val goal = editTextGoal.text.toString()
-            val length = editTextLength.text.toString() // Hämta längd från EditText
+            val length = editTextLength.text.toString()
 
-            viewModel.updateProfile(name, age, gender, weight, goal, length) // Uppdatera profilen
+            viewModel.updateProfile(name, age, gender, weight, goal, length)
             Toast.makeText(requireContext(), "Profil sparad!", Toast.LENGTH_SHORT).show()
         }
     }

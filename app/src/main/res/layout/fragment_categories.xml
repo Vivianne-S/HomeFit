@@ -6,15 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.categories.CategoriesFragment"
     android:background="@drawable/app_background"
-    android:paddingHorizontal="8sp"
-    android:paddingVertical="15sp"
+    android:orientation="vertical"
     >
+
+
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- AppBarLayout med Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00A45050"
+        app:titleTextColor="@android:color/black">
+    </androidx.appcompat.widget.Toolbar>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 
 
     <androidx.cardview.widget.CardView
@@ -24,7 +37,7 @@
         app:cardCornerRadius="15dp"
         android:backgroundTint="#CFFFA7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -39,7 +52,7 @@
                 android:id="@+id/category_image_arms"
                 android:src="@drawable/arms_category_image"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 />
 
             <TextView
@@ -76,7 +89,8 @@
         app:cardCornerRadius="15dp"
         android:backgroundTint="#CFFFA7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -91,7 +105,7 @@
                 android:id="@+id/category_image_legs"
                 android:src="@drawable/legs_category_img"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 />
 
             <TextView
@@ -129,7 +143,8 @@
         app:cardCornerRadius="15dp"
         android:backgroundTint="#CFFFA7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -144,7 +159,7 @@
                 android:id="@+id/category_image_chest"
                 android:src="@drawable/chest_category_image"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 />
 
             <TextView
@@ -181,7 +196,8 @@
         app:cardCornerRadius="15dp"
         android:backgroundTint="#CFFFA7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -196,7 +212,7 @@
                 android:id="@+id/category_image_back"
                 android:src="@drawable/back_categories_image"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 />
 
             <TextView
@@ -233,7 +249,8 @@
         app:cardCornerRadius="15dp"
         android:backgroundTint="#CFFFA7"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
@@ -248,7 +265,7 @@
                 android:id="@+id/category_image_core"
                 android:src="@drawable/core_categories_image"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 />
 
             <TextView

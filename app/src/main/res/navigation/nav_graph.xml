@@ -63,7 +63,7 @@
     <!-- Exercises Fragment: Sidan med övningar -->
     <fragment
         android:id="@+id/exercisesFragment"
-        android:name="com.example.homefit.ui.exercises.ExercisesFragment"
+        android:name="com.example.homefit.ui.exercises.ArmsExercisesFragment"
         tools:layout="@layout/fragment_exercises">
     </fragment>
 

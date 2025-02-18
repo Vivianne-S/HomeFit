@@ -42,12 +42,11 @@
                 android:background="?attr/selectableItemBackground"
                 android:contentDescription="Öppna meny"
                 android:padding="8dp"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end"
+                />
         </androidx.appcompat.widget.Toolbar>
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="HomeFit" />
+
 
 
         <!-- NavHostFragment (Fragment for navigation) -->

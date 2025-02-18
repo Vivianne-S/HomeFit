@@ -1,3 +1,5 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,84 +56,112 @@
                         android:textColor="@color/logoblue"
                         android:textSize="30sp" />
 
-                    <EditText
-                        android:id="@+id/editTextGender"
+                    <!-- Gender -->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_gender_hint"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:hint="@string/profile_gender_hint">
 
-                    <EditText
-                        android:id="@+id/editTextAge"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/logoblue"
+                            android:padding="12dp"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Age -->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_age_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:hint="@string/profile_age_hint">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextAge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/logoblue"
+                            android:inputType="number"
+                            android:padding="12dp"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/editTextWeight"
+                    <!-- Weight -->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_weight_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:hint="@string/profile_weight_hint">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextWeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/logoblue"
+                            android:inputType="number"
+                            android:padding="12dp"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/editTextLength"
+                    <!-- Length -->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_length_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:hint="@string/profile_length_hint">
 
-                    <EditText
-                        android:id="@+id/editTextGoal"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextLength"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/logoblue"
+                            android:inputType="number"
+                            android:padding="12dp"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Goal -->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_goal_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:hint="@string/profile_goal_hint">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/logoblue"
+                            android:inputType="number"
+                            android:padding="12dp"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Stapeldiagram -->
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/WeightBarChart"
                         android:layout_width="match_parent"
-                        android:layout_height="140dp" />
+                        android:layout_height="220dp" />
+
+                    <!-- Spara-knapp -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSaveProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/logoblue"
+                        android:text="@string/save_profile_button"
+                        android:textColor="@android:color/white"
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
-
-    <!-- Spara-knapp utanför ScrollView -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSaveProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/logoblue"
-        android:text="@string/save_profile_button"
-        android:textColor="@android:color/white"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp" />
 
 </LinearLayout>

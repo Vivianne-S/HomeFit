@@ -30,8 +30,10 @@ class ProfileViewModel : ViewModel() {
     private val _length = MutableLiveData<String>()
     val length: LiveData<String> = _length
 
-    // ✅ Ladda användarens profil från Firestore
+    // Ladda användarens profil från Firestore
     fun loadProfile() {
+        Log.d("ProfileViewModel", "loadProfile() anropades")
+
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")
             return
@@ -40,7 +42,8 @@ class ProfileViewModel : ViewModel() {
         db.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    _name.value = document.getString("name") ?: ""
+                    val fetchedName = document.getString("name") ?: "YOUR NAME"
+                    _name.value = fetchedName
                     _age.value = document.getString("age") ?: ""
                     _gender.value = document.getString("gender") ?: ""
                     _weight.value = document.getString("weight") ?: ""
@@ -57,7 +60,7 @@ class ProfileViewModel : ViewModel() {
             }
     }
 
-    // ✅ Uppdatera Firestore med användarens profil
+    // Uppdatera Firestore med användarens profil
     fun updateProfile(name: String, age: String, gender: String, weight: String, goal: String, length: String) {
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")
@@ -77,6 +80,12 @@ class ProfileViewModel : ViewModel() {
             .set(userProfile)
             .addOnSuccessListener {
                 Log.d("ProfileViewModel", "Profil sparad för userId: $userId med data: $userProfile")
+                _name.value = name
+                _age.value = age
+                _gender.value = gender
+                _weight.value = weight
+                _goal.value = goal
+                _length.value = length
             }
             .addOnFailureListener { e ->
                 Log.e("ProfileViewModel", "Fel vid uppdatering", e)

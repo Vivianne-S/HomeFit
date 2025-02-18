@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,31 +8,31 @@
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-    <!-- AppBarLayout med Toolbar -->
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white">
-    </androidx.appcompat.widget.Toolbar>
+        app:title="@string/profile_title"
+        app:titleTextColor="@android:color/white" />
 
-    <!-- Innehållet i fragmentet -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="16dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <!-- Lottie Animation -->
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/exercise_animation"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
                 app:lottie_autoPlay="true"
@@ -43,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:elevation="4dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -55,71 +57,64 @@
                         android:id="@+id/textViewName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/lancelot"
                         android:text="@string/profile_name_hint"
                         android:textColor="@color/logoblue"
-                        android:textSize="30sp" />
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/editTextAge"
+                    <TextView
+                        android:id="@+id/textViewAge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_age_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profile_age_hint"
+                        android:textColor="@color/logoblue"
+                        android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/editTextGender"
+                    <TextView
+                        android:id="@+id/textViewGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_gender_hint"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profile_gender_hint"
+                        android:textColor="@color/logoblue"
+                        android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/editTextWeight"
+                    <TextView
+                        android:id="@+id/textViewWeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_weight_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profile_weight_hint"
+                        android:textColor="@color/logoblue"
+                        android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/editTextGoal"
+                    <TextView
+                        android:id="@+id/textViewGoal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_goal_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profile_goal_hint"
+                        android:textColor="@color/logoblue"
+                        android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/editTextLength"
+                    <TextView
+                        android:id="@+id/textViewLength"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/profile_length_hint"
-                        android:inputType="number"
-                        android:padding="12dp"
-                        android:textSize="12sp" />
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profile_length_hint"
+                        android:textColor="@color/logoblue"
+                        android:textSize="14sp" />
 
                     <!-- Stapeldiagram -->
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/WeightBarChart"
                         android:layout_width="match_parent"
-                        android:layout_height="140dp" />
+                        android:layout_height="140dp"
+                        android:layout_marginTop="12dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -127,16 +122,20 @@
     </ScrollView>
 
     <!-- Spara-knapp utanför ScrollView -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSaveProfile"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/logoblue"
-        android:text="@string/save_profile_button"
-        android:textColor="@android:color/white"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp" />
+        android:padding="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/logoblue"
+            android:text="@string/save_profile_button"
+            android:textColor="@android:color/white"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -31,6 +31,7 @@
     <string name="profile_gender_hint">Gender</string>
     <string name="save_profile_button">Save Profile</string>
     <string name="profile_length_hint">Length (cm)</string>
+    <string name="profile_title">Profile</string>
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open Navigation Drawer</string>

@@ -8,22 +8,24 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.firestore.FirebaseFirestore
 import java.net.UnknownHostException
 
 class AuthViewModel : ViewModel() {
 
-    // FirebaseAuth instans för att hantera autentisering
+    // Firebase instanser för autentisering och Firestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    // LiveData för att observera autentiseringens status
+    // LiveData för autentisering
     private val _isAuthenticated = MutableLiveData<Boolean>()
     val isAuthenticated: LiveData<Boolean> get() = _isAuthenticated
 
-    // LiveData för att hantera felmeddelanden
+    // LiveData för felmeddelanden
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
 
-    // LiveData för att hantera toast-meddelanden
+    // LiveData för toast-meddelanden
     private val _toastMessage = MutableLiveData<String?>()
     val toastMessage: LiveData<String?> get() = _toastMessage
 
@@ -37,45 +39,33 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    // Logga in användaren med email och lösenord
-    fun signIn(email: String, password: String) {
-        if (email.isEmpty() || password.isEmpty()) {
-            _errorMessage.value = "Please enter both email and password"
-            return
-        }
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("AuthViewModel", "Login successful: ${auth.currentUser?.uid}")
-                    _isAuthenticated.value = true
-                } else {
-                    val exceptionMessage = handleError(task.exception)
-                    Log.e("AuthViewModel", "Login failed: $exceptionMessage")
-                    _isAuthenticated.value = false
-                    _errorMessage.value = exceptionMessage
-                }
-            }
-    }
-
-    // Registrera en ny användare
-    fun signUp(email: String, password: String, callback: (Boolean, String?) -> Unit) {
+    // Registrera en ny användare och spara namn i Firestore
+    fun signUp(email: String, password: String, name: String, callback: (Boolean, String?) -> Unit) {
         if (email.isEmpty() || password.length < 6) {
-            _toastMessage.value =
-                "Email cannot be empty and password must be at least 6 characters long."
-            callback(
-                false,
-                "Email cannot be empty and password must be at least 6 characters long."
-            )
+            _toastMessage.value = "Email cannot be empty and password must be at least 6 characters long."
+            callback(false, "Email cannot be empty and password must be at least 6 characters long.")
             return
         }
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("AuthViewModel", "User created: ${auth.currentUser?.uid}")
-                    _toastMessage.value = "Account created! Please sign in."
-                    callback(true, null)
+                    val user = auth.currentUser
+                    user?.let {
+                        // Spara användarens namn i Firestore
+                        val userData = mapOf("name" to name, "email" to email)
+                        firestore.collection("users").document(user.uid)
+                            .set(userData)
+                            .addOnSuccessListener {
+                                Log.d("AuthViewModel", "User created and name saved in Firestore.")
+                                _toastMessage.value = "Account created! Please sign in."
+                                callback(true, null)
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("AuthViewModel", "Failed to save name in Firestore: ${e.message}")
+                                callback(false, "Failed to save name in Firestore.")
+                            }
+                    }
                 } else {
                     val exceptionMessage = handleError(task.exception)
                     Log.e("AuthViewModel", "Signup failed: $exceptionMessage")
@@ -85,7 +75,30 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-    // Återställa lösen
+    // Logga in användaren
+    fun signIn(email: String, password: String) {
+        if (email.isEmpty() || password.isEmpty()) {
+            _toastMessage.value = "Email and password cannot be empty"
+            return
+        }
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    user?.let {
+                        // Användaren är inloggad
+                        _isAuthenticated.value = true
+                        _toastMessage.value = "Login successful"
+                    }
+                } else {
+                    val exceptionMessage = handleError(task.exception)
+                    _toastMessage.value = exceptionMessage
+                }
+            }
+    }
+
+    // Hantera lösenordsåterställning
     fun resetPassword(email: String, callback: (Boolean, String) -> Unit) {
         if (email.isEmpty()) {
             callback(false, "Please enter your email address")
@@ -95,15 +108,9 @@ class AuthViewModel : ViewModel() {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("AuthViewModel", "Password reset email sent to $email")
-                    callback(
-                        true,
-                        "Password reset email sent successfully. Please check your inbox, including the spam folder."
-                    )
+                    callback(true, "Password reset email sent. Please check your inbox.")
                 } else {
-                    val exceptionMessage = handleError(task.exception)
-                    Log.e("AuthViewModel", "Failed to send password reset email: $exceptionMessage")
-                    callback(false, exceptionMessage)
+                    callback(false, "Failed to send reset email. Please try again.")
                 }
             }
     }
@@ -114,7 +121,7 @@ class AuthViewModel : ViewModel() {
         _isAuthenticated.value = false
     }
 
-    // Kollar om användaren är redan inloggad
+    // Kolla om användaren är redan inloggad
     fun checkIfUserIsLoggedIn() {
         val user = auth.currentUser
         if (user != null) {
@@ -124,4 +131,3 @@ class AuthViewModel : ViewModel() {
         }
     }
 }
-

@@ -1,5 +1,6 @@
 package com.example.homefit.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,34 +30,56 @@ class ProfileViewModel : ViewModel() {
     private val _length = MutableLiveData<String>()
     val length: LiveData<String> = _length
 
+    // ✅ Ladda användarens profil från Firestore
     fun loadProfile() {
-        userId?.let { uid ->
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        _name.value = document.getString("name") ?: ""
-                        _age.value = document.getString("age") ?: ""
-                        _gender.value = document.getString("gender") ?: ""
-                        _weight.value = document.getString("weight") ?: ""
-                        _goal.value = document.getString("goal") ?: ""
-                        _length.value = document.getString("length") ?: ""
-                    }
-                }
+        if (userId == null) {
+            Log.e("ProfileViewModel", "Användaren är inte inloggad!")
+            return
         }
+
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    _name.value = document.getString("name") ?: ""
+                    _age.value = document.getString("age") ?: ""
+                    _gender.value = document.getString("gender") ?: ""
+                    _weight.value = document.getString("weight") ?: ""
+                    _goal.value = document.getString("goal") ?: ""
+                    _length.value = document.getString("length") ?: ""
+
+                    Log.d("ProfileViewModel", "Profil laddad: ${document.data}")
+                } else {
+                    Log.d("ProfileViewModel", "Ingen profil hittades för $userId")
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileViewModel", "Fel vid inläsning av profil", e)
+            }
     }
 
+    // ✅ Uppdatera Firestore med användarens profil
     fun updateProfile(name: String, age: String, gender: String, weight: String, goal: String, length: String) {
-        userId?.let { uid ->
-            val userProfile = hashMapOf(
-                "name" to name,
-                "age" to age,
-                "gender" to gender,
-                "weight" to weight,
-                "goal" to goal,
-                "length" to length
-            )
-
-            db.collection("users").document(uid).set(userProfile)
+        if (userId == null) {
+            Log.e("ProfileViewModel", "Användaren är inte inloggad!")
+            return
         }
+
+        val userProfile = hashMapOf(
+            "name" to name,
+            "age" to age,
+            "gender" to gender,
+            "weight" to weight,
+            "goal" to goal,
+            "length" to length
+        )
+
+        db.collection("users").document(userId)
+            .set(userProfile)
+            .addOnSuccessListener {
+                Log.d("ProfileViewModel", "Profil sparad för userId: $userId med data: $userProfile")
+            }
+            .addOnFailureListener { e ->
+                Log.e("ProfileViewModel", "Fel vid uppdatering", e)
+            }
     }
 }

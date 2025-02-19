@@ -2,6 +2,8 @@
     <!-- App name -->
     <string name="app_name">HomeFit</string>
 
+    <!--  Fragment tile names -->
+    <string name="categories_title">Categories</string>
 
     <!-- Welcome messages -->
     <string name="welcome_message_journey">Your Fitness Journey Begins</string>

@@ -2,6 +2,7 @@
     <!-- App name -->
     <string name="app_name">HomeFit</string>
 
+
     <!-- Welcome messages -->
     <string name="welcome_message_journey">Your Fitness Journey Begins</string>
     <string name="welcome_message_with">with</string>
@@ -22,7 +23,6 @@
     <string name="tap_the_screen_to_continue">Tap the Screen to Continue</string>
     <string name="user_age_input">Age</string>
 
-
     <!-- Profile Fragment Strings -->
     <string name="profile_name_hint">Your Name</string>
     <string name="profile_age_hint">Age</string>
@@ -31,8 +31,6 @@
     <string name="profile_gender_hint">Gender</string>
     <string name="save_profile_button">Save Profile</string>
     <string name="profile_length_hint">Length (cm)</string>
-
-
 
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
@@ -63,7 +61,6 @@
 
     <!-- Workout Name -->
     <string name="workout_name">Chair Dips</string>
-
 
     <!-- Category Layout Strings -->
     <string name="category_name">Chair Dips</string>

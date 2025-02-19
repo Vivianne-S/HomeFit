@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
@@ -49,6 +50,19 @@ class SplashFragment : Fragment() {
             handler.postDelayed({
                 binding.tvHomeFit.visibility = View.VISIBLE
             }, 2600)
+
+            // Visar "Tap screen to continue" texten efter 3 sekunder
+            handler.postDelayed({
+                binding.tvTapToContinue.visibility = View.VISIBLE
+
+                // Gör så att Tap the screen blinkar
+                val blinkAnimation = AlphaAnimation(1f, 0f) // Från full opacity till transparent
+                blinkAnimation.duration = 700
+                blinkAnimation.startOffset = 0
+                blinkAnimation.repeatMode = AlphaAnimation.REVERSE
+                blinkAnimation.repeatCount = AlphaAnimation.INFINITE
+                binding.tvTapToContinue.startAnimation(blinkAnimation)
+            }, 3000)
 
             // Navigerar till inloggningssidan när användaren klickar på skärmen
             binding.root.setOnClickListener {

@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.homefit.R
@@ -35,8 +34,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         // UI-element
         val textViewName: TextView = binding.textViewName
         val editTextAge: EditText = binding.editTextAge
@@ -47,19 +44,23 @@ class ProfileFragment : Fragment() {
         val btnSaveProfile = binding.btnSaveProfile
         barChart = binding.WeightBarChart
 
-        // Lottie-animation
-        val exerciseAnimation = binding.exerciseAnimation
-
-        // Ladda in existerande data från ViewModel
+        // Ladda in existerande data från ViewModel och uppdatera diagram när vikten ändras
         viewModel.name.observe(viewLifecycleOwner) { textViewName.text = it }
         viewModel.age.observe(viewLifecycleOwner) { editTextAge.setText(it) }
         viewModel.gender.observe(viewLifecycleOwner) { editTextGender.setText(it) }
-        viewModel.weight.observe(viewLifecycleOwner) { editTextWeight.setText(it) }
-        viewModel.goal.observe(viewLifecycleOwner) { editTextGoal.setText(it) }
+        viewModel.weight.observe(viewLifecycleOwner) {
+            editTextWeight.setText(it)
+            updateBarChart(it)
+        }
+        // Uppdatera diagrammet när målet ändras med aktuell vikt
+        viewModel.goal.observe(viewLifecycleOwner) { goal ->
+            editTextGoal.setText(goal)
+            updateBarChart(viewModel.weight.value ?: "0")
+        }
         viewModel.length.observe(viewLifecycleOwner) { editTextLength.setText(it) }
 
-        viewModel.loadProfile() // Ladda in användarens profil
-        setupBarChart() // Ställ in diagrammet
+        viewModel.loadProfile()
+        setupBarChart()
 
         // När användaren sparar sin profil
         btnSaveProfile.setOnClickListener {
@@ -75,26 +76,61 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    // Metod för att ställa in stapeldiagrammet
+    // Hämta användarens vikt och mål från ViewModel
     private fun setupBarChart() {
+        val weightValue = viewModel.weight.value?.toFloatOrNull() ?: 0f
+        val goalValue = viewModel.goal.value?.toFloatOrNull() ?: 0f
+
+        // Skapa två uppsättningar av BarEntry för att representera både vikt och mål
         val barEntries = arrayListOf(
-            BarEntry(1f, 70f),
-            BarEntry(2f, 68f),
-            BarEntry(3f, 66f),
-            BarEntry(4f, 65f),
-            BarEntry(5f, 64f)
+            BarEntry(1f, weightValue),
+            BarEntry(2f, goalValue)
         )
 
-        val barDataSet = BarDataSet(barEntries, "Viktförändring")
-        barDataSet.color = Color.BLUE
-        barDataSet.valueTextColor = Color.BLACK
-        barDataSet.valueTextSize = 12f
+        // Grön färg för vikten och rosa för målet
+        val weightBarDataSet = BarDataSet(barEntries, "Weight vs Goal")
+        weightBarDataSet.colors = listOf(Color.GREEN, Color.parseColor("#FF69B4"))
+        weightBarDataSet.valueTextColor = Color.BLACK
+        weightBarDataSet.valueTextSize = 12f
 
-        val barData = BarData(barDataSet)
+        val barData = BarData(weightBarDataSet)
         barChart.data = barData
         barChart.description.isEnabled = false
         barChart.invalidate()
     }
+
+    private fun updateBarChart(weight: String) {
+        val weightValue = weight.toFloatOrNull() ?: return
+        val goalValue = viewModel.goal.value?.toFloatOrNull() ?: 0f  // Om goal är null sätt till 0
+
+        // Beräkna hur många kg som är kvar till målet
+        val remainingWeight = weightValue - goalValue
+        val remainingText = "You have ${remainingWeight.toInt()} kg remaining to your Goal!"
+
+        // Skapa uppsättningar för både vikt och mål
+        val barEntries = arrayListOf(
+            BarEntry(1f, weightValue),
+            BarEntry(2f, goalValue)
+        )
+
+        // Grön för vikt och rosa för mål
+        val weightBarDataSet = BarDataSet(barEntries, "Weight vs Goal")
+        weightBarDataSet.colors = listOf(Color.parseColor("#0F80E2"), Color.parseColor("#FF69B4"))
+        weightBarDataSet.valueTextColor = Color.BLACK
+        weightBarDataSet.valueTextSize = 12f
+
+        // Uppdatera diagrammet
+        val barData = BarData(weightBarDataSet)
+        barChart.data = barData
+        barChart.description.isEnabled = false
+        barChart.invalidate()
+
+        // Visa texten för kvarvarande vikt
+        val textViewRemainingWeight: TextView = binding.textViewRemainingWeight
+        textViewRemainingWeight.text = remainingText
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

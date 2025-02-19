@@ -24,13 +24,13 @@ class ProfileViewModel : ViewModel() {
     private val _weight = MutableLiveData<String>()
     val weight: LiveData<String> = _weight
 
-    private val _goal = MutableLiveData<String>()
-    val goal: LiveData<String> = _goal
+    private val _goal = MutableLiveData<String?>()
+    val goal: LiveData<String?> = _goal
 
     private val _length = MutableLiveData<String>()
     val length: LiveData<String> = _length
 
-    // ✅ Ladda användarens profil från Firestore
+    // Ladda användarens profil från Firestore
     fun loadProfile() {
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")
@@ -44,7 +44,7 @@ class ProfileViewModel : ViewModel() {
                     _age.value = document.getString("age") ?: ""
                     _gender.value = document.getString("gender") ?: ""
                     _weight.value = document.getString("weight") ?: ""
-                    _goal.value = document.getString("goal") ?: ""
+                    _goal.value = document.getString("goal")  // Nu kan goal vara null om det inte är angivet
                     _length.value = document.getString("length") ?: ""
 
                     Log.d("ProfileViewModel", "Profil laddad: ${document.data}")
@@ -57,8 +57,8 @@ class ProfileViewModel : ViewModel() {
             }
     }
 
-    // ✅ Uppdatera Firestore med användarens profil
-    fun updateProfile(name: String, age: String, gender: String, weight: String, goal: String, length: String) {
+    // Uppdatera Firestore med användarens profil
+    fun updateProfile(name: String, age: String, gender: String, weight: String, goal: String?, length: String) {
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")
             return
@@ -77,6 +77,9 @@ class ProfileViewModel : ViewModel() {
             .set(userProfile)
             .addOnSuccessListener {
                 Log.d("ProfileViewModel", "Profil sparad för userId: $userId med data: $userProfile")
+                // Uppdatera weight och goal i LiveData efter att ha sparat dem i Firestore och sätter den till liveData
+                _weight.value = weight
+                _goal.value = goal
             }
             .addOnFailureListener { e ->
                 Log.e("ProfileViewModel", "Fel vid uppdatering", e)

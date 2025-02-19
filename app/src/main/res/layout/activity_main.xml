@@ -17,36 +17,32 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@drawable/app_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <!-- Tillbaka-knapp (vänster sida) -->
             <ImageButton
                 android:id="@+id/back_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_arrow_back"
+                android:layout_gravity="start"
                 android:background="?attr/selectableItemBackground"
                 android:contentDescription="Gå tillbaka"
                 android:padding="8dp"
-                android:layout_gravity="start"/>
+                android:src="@drawable/ic_arrow_back" />
 
             <!-- Hamburgermenyn (höger sida) -->
             <ImageButton
                 android:id="@+id/menu_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_menu"
+                android:layout_gravity="end"
                 android:background="?attr/selectableItemBackground"
                 android:contentDescription="Öppna meny"
                 android:padding="8dp"
-                android:layout_gravity="end"
-                />
+                android:src="@drawable/ic_menu" />
         </androidx.appcompat.widget.Toolbar>
-
-
 
 
         <!-- NavHostFragment (Fragment for navigation) -->
@@ -67,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:background="@color/white"
-
-        app:menu="@menu/main_menu"/>
+        android:background="@drawable/app_background"
+        android:maxHeight="200dp"
+        app:menu="@menu/main_menu" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

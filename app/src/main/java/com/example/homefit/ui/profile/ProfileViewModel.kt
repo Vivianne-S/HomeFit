@@ -30,7 +30,7 @@ class ProfileViewModel : ViewModel() {
     private val _length = MutableLiveData<String>()
     val length: LiveData<String> = _length
 
-    // ✅ Ladda användarens profil från Firestore
+    // Ladda användarens profil från Firestore
     fun loadProfile() {
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")
@@ -57,7 +57,7 @@ class ProfileViewModel : ViewModel() {
             }
     }
 
-    // ✅ Uppdatera Firestore med användarens profil
+    //Uppdatera Firestore med användarens profil
     fun updateProfile(name: String, age: String, gender: String, weight: String, goal: String, length: String) {
         if (userId == null) {
             Log.e("ProfileViewModel", "Användaren är inte inloggad!")

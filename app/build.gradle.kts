@@ -27,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -41,26 +42,42 @@ android {
 
 dependencies {
 
+    // Material design och andra användbara bibliotek
     implementation("com.google.android.material:material:1.9.0")
-    implementation ("com.airbnb.android:lottie:5.0.3")
+    implementation("com.airbnb.android:lottie:5.0.3")
 
+    // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-compose:2.5.3") // Navigering
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1") // ViewModel
-    implementation("androidx.room:room-runtime:2.5.0") // Room Database
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0") //Graph
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+
+    // Lifecycle och Room
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.room:room-runtime:2.5.0")
+
+    // För diagram och graffunktionalitet
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // Core och AppCompat
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
+    // Material Design och ConstraintLayout
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Firebase beroenden
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+
+    // Support och Lifecycle för äldre komponenter
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+
+    // Test beroenden
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

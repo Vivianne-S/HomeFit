@@ -50,9 +50,10 @@ class SignUpFragment : Fragment() {
         binding.btnSignUp.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
+            val name = binding.etUsername.text.toString().trim()
 
             // Anropa signUp funktionen från AuthViewModel
-            authViewModel.signUp(email, password) { success, errorMessage ->
+            authViewModel.signUp(email, password, name) { success, errorMessage ->
                 if (success) {
                     findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
                 }

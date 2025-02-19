@@ -8,12 +8,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.firestore.FirebaseFirestore
 import java.net.UnknownHostException
 
 class AuthViewModel : ViewModel() {
 
     // FirebaseAuth instans för att hantera autentisering
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    // Firebase Firestore instans för att hantera användardata
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     // LiveData för att observera autentiseringens status
     private val _isAuthenticated = MutableLiveData<Boolean>()
@@ -59,7 +63,7 @@ class AuthViewModel : ViewModel() {
     }
 
     // Registrera en ny användare
-    fun signUp(email: String, password: String, callback: (Boolean, String?) -> Unit) {
+    fun signUp(email: String, password: String, name: String, callback: (Boolean, String?) -> Unit) {
         if (email.isEmpty() || password.length < 6) {
             _toastMessage.value =
                 "Email cannot be empty and password must be at least 6 characters long."
@@ -73,9 +77,32 @@ class AuthViewModel : ViewModel() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("AuthViewModel", "User created: ${auth.currentUser?.uid}")
-                    _toastMessage.value = "Account created! Please sign in."
-                    callback(true, null)
+                    // Skapa användardokument i Firestore med användarnamn
+                    val userId = auth.currentUser?.uid
+                    if (userId != null) {
+                        val user = hashMapOf(
+                            "name" to name,
+                            "email" to email,
+                            "age" to "",
+                            "gender" to "",
+                            "weight" to "",
+                            "goal" to "",
+                            "length" to ""
+                        )
+
+                        // Lägger till användardokument i Firestore
+                        db.collection("users").document(userId)
+                            .set(user)
+                            .addOnSuccessListener {
+                                Log.d("AuthViewModel", "User created with name: $name")
+                                _toastMessage.value = "Account created! Please sign in."
+                                callback(true, null)
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("AuthViewModel", "Error creating user document", e)
+                                callback(false, e.message)
+                            }
+                    }
                 } else {
                     val exceptionMessage = handleError(task.exception)
                     Log.e("AuthViewModel", "Signup failed: $exceptionMessage")
@@ -124,4 +151,3 @@ class AuthViewModel : ViewModel() {
         }
     }
 }
-

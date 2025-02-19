@@ -32,11 +32,13 @@
     <string name="save_profile_button">Save Profile</string>
     <string name="profile_length_hint">Length (cm)</string>
 
+
+
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
-    <!-- Menyknappar -->
+    <!-- Menu Buttons -->
     <string name="nav_home">Home</string>
     <string name="nav_favorites">Favorites</string>
     <string name="nav_profile">Profile</string>
@@ -61,6 +63,7 @@
 
     <!-- Workout Name -->
     <string name="workout_name">Chair Dips</string>
+
 
     <!-- Category Layout Strings -->
     <string name="category_name">Chair Dips</string>

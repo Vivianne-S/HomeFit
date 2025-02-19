@@ -36,7 +36,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:elevation="4dp">
 
                 <LinearLayout
@@ -52,9 +52,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/lancelot"
-                        android:text="@string/profile_name_hint"
                         android:textColor="@color/logoblue"
-                        android:textSize="30sp" />
+                        android:textSize="30sp"
+                        />
 
                     <!-- Gender -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -134,17 +134,29 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
-                            android:textColor="@color/logoblue"
+                            android:textColor="@color/pink"
                             android:inputType="number"
                             android:padding="12dp"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
+
 
                     <!-- Stapeldiagram -->
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/WeightBarChart"
                         android:layout_width="match_parent"
                         android:layout_height="220dp" />
+
+                    <TextView
+                        android:id="@+id/textViewRemainingWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/pink"
+                        android:fontFamily="@font/lancelot"/>
+
 
                     <!-- Spara-knapp -->
                     <com.google.android.material.button.MaterialButton

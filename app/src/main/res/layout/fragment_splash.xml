@@ -7,12 +7,12 @@
     android:background="@drawable/app_background"
     tools:context=".ui.splash.SplashFragment">
 
-    <!-- App Logo-->
+    <!-- App Logo -->
     <ImageView
         android:id="@+id/ivAppLogo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,6 @@
         android:id="@+id/tvJourney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="30dp"
         android:fontFamily="@font/lancelot"
         android:text="@string/welcome_message_journey"
         android:textColor="@color/black"
@@ -32,9 +30,12 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAppLogo" />
+        app:layout_constraintTop_toBottomOf="@id/ivAppLogo"
+        android:layout_marginTop="20dp"
+        android:gravity="center" />
 
-    <!-- TextView for with  -->
+
+    <!-- TextView for with -->
     <TextView
         android:id="@+id/tvWith"
         android:layout_width="wrap_content"
@@ -46,7 +47,8 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvJourney" />
+        app:layout_constraintTop_toBottomOf="@id/tvJourney"
+        android:layout_marginTop="10dp" />
 
     <!-- TextView for HomeFit -->
     <TextView
@@ -61,7 +63,9 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvWith" />
+        app:layout_constraintTop_toBottomOf="@id/tvWith"
+        android:layout_marginTop="10dp" />
+
 
     <!-- TextView Tap screen to continue -->
     <TextView
@@ -70,11 +74,12 @@
         android:layout_height="wrap_content"
         android:text="@string/tap_the_screen_to_continue"
         android:textColor="@color/gray"
-        android:textSize="16sp"
-        android:layout_marginBottom="70dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textAlignment="center" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

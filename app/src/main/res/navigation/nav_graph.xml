@@ -56,15 +56,50 @@
         android:name="com.example.homefit.ui.categories.CategoriesFragment"
         tools:layout="@layout/fragment_categories">
         <action
-            android:id="@+id/action_categoriesFragment_to_exercisesFragment"
-            app:destination="@id/exercisesFragment" />
+            android:id="@+id/action_categoriesFragment_to_armExercisesFragment"
+            app:destination="@id/arm_exercisesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_back_exercisesFragment"
+            app:destination="@id/back_exercisesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_chest_exercisesFragment"
+            app:destination="@id/chest_exercisesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_core_exercisesFragment"
+            app:destination="@id/core_exercisesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_legs_exercisesFragment"
+            app:destination="@id/legs_exercisesFragment" />
     </fragment>
 
     <!-- Exercises Fragment: Sidan med övningar -->
     <fragment
-        android:id="@+id/exercisesFragment"
+        android:id="@+id/arm_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.ArmsExercisesFragment"
-        tools:layout="@layout/fragment_exercises">
+        tools:layout="@layout/fragment_arms_exercises">
+    </fragment>
+
+    <fragment
+        android:id="@+id/back_exercisesFragment"
+        android:name="com.example.homefit.ui.exercises.BackExercisesFragment"
+        tools:layout="@layout/fragment_back_exercises">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chest_exercisesFragment"
+        android:name="com.example.homefit.ui.exercises.ChestExercisesFragment"
+        tools:layout="@layout/fragment_chest_exercises">
+    </fragment>
+
+    <fragment
+        android:id="@+id/core_exercisesFragment"
+        android:name="com.example.homefit.ui.exercises.CoreExercisesFragment"
+        tools:layout="@layout/fragment_core_exercises">
+    </fragment>
+    <fragment
+        android:id="@+id/legs_exercisesFragment"
+        android:name="com.example.homefit.ui.exercises.LegsExercisesFragment"
+        tools:layout="@layout/fragment_legs_exercises">
     </fragment>
 
     <!-- Profile Fragment: Profilsidan -->

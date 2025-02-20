@@ -11,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.homefit.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +26,7 @@ class CalenderFragment : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
     private var selectedDate: String = getFormattedDate(System.currentTimeMillis()) // Förvalt till dagens datum
+    val currentUserId = Firebase.auth.currentUser!!.uid
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +58,7 @@ class CalenderFragment : Fragment() {
         btnSave.setOnClickListener {
             val exercise = editTextExercise.text.toString()
             if (exercise.isNotEmpty()) {
-                saveExercise(selectedDate, exercise)
+                saveExercise(selectedDate, exercise, currentUserId)
             } else {
                 Toast.makeText(requireContext(), "Skriv in en övning först", Toast.LENGTH_SHORT).show()
             }
@@ -67,8 +70,8 @@ class CalenderFragment : Fragment() {
         return sdf.format(Date(timeInMillis))
     }
 
-    private fun saveExercise(date: String, exercise: String) {
-        val exerciseData = hashMapOf("exercise" to exercise)
+    private fun saveExercise(date: String, exercise: String, userID: String) {
+        val exerciseData = hashMapOf("exercise" to exercise, "userID" to userID)
 
         db.collection("exercises").document(date)
             .set(exerciseData)
@@ -87,9 +90,12 @@ class CalenderFragment : Fragment() {
             .get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val exercise = document.getString("exercise") ?: ""
-                    textViewExercises.text = "Dagens övning: $exercise"
-                    editTextExercise.setText(exercise)
+                    val userId = document.getString("userID") ?: ""
+                    if (userId == currentUserId) {
+                        val exercise = document.getString("exercise") ?: ""
+                        textViewExercises.text = "Dagens övning: $exercise"
+                        editTextExercise.setText(exercise)
+                    }
                 } else {
                     textViewExercises.text = "Dagens övning: Ingen än"
                     editTextExercise.setText("")

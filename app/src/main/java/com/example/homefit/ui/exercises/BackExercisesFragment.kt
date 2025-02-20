@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
+import com.example.homefit.databinding.FragmentArmsExercisesBinding
+import com.example.homefit.databinding.FragmentBackExercisesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,43 +22,71 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BackExercisesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    //private var param1: String? = null
+    //private var param2: String? = null
+
+    private var _binding: FragmentBackExercisesBinding? = null
+    private val binding get() = _binding!!
+
+    companion object {
+        fun newInstance() = BackExercisesFragment()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
+        /*arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-        }
+        }*/
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_back_exercises, container, false)
+    ): View {
+        _binding = FragmentBackExercisesBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BackExercisesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BackExercisesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // UI-element
+        val cardViewSuper: CardView = binding.supermanCardview
+        val cardViewCatCow: CardView = binding.catcowCardview
+        val cardViewGood: CardView = binding.goodmorningCardview
+        val cardViewReverseFlys: CardView = binding.reverseflysCardview
+        val cardViewReversePlank: CardView = binding.reverseplankCardview
+
+        //clicklistener for Arms Category
+        cardViewSuper.setOnClickListener {
+            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+        }
+
+        //clicklistener for Legs Category
+        cardViewCatCow.setOnClickListener {
+            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+        }
+
+        //clicklistener for Chest Category
+        cardViewGood.setOnClickListener {
+            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+        }
+
+        //clicklistener for Back Category
+        cardViewReverseFlys.setOnClickListener {
+            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+        }
+
+        //clicklistener for Core Category
+        cardViewReversePlank.setOnClickListener {
+            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

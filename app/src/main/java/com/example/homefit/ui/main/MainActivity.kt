@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.categoriesFragment) // Navigera till CategoriesFragment
                 }
                 R.id.nav_favorites -> {
-                    // TODO: Navigera till FavoritesFragment
+                    navController.navigate(R.id.favoritesFragment) // Navigera till FavoritesFragment
                 }
                 R.id.nav_profile -> {
                     navController.navigate(R.id.profileFragment) // Navigera till ProfileFragment

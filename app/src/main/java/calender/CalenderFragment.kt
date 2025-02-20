@@ -1,5 +1,3 @@
-package calender
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +8,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import java.util.Calendar
 import com.example.homefit.R
-
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CalenderFragment : Fragment() {
 
@@ -21,8 +20,8 @@ class CalenderFragment : Fragment() {
     private lateinit var btnSave: Button
     private lateinit var textViewExercises: TextView
 
-    private val exerciseMap = mutableMapOf<Long, String>() // Sparar övningar per datum
-    private var selectedDate: Long = System.currentTimeMillis() // Förvalt till dagens datum
+    private val db = FirebaseFirestore.getInstance()
+    private var selectedDate: String = getFormattedDate(System.currentTimeMillis()) // Förvalt till dagens datum
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,27 +38,63 @@ class CalenderFragment : Fragment() {
         btnSave = view.findViewById(R.id.btnSave)
         textViewExercises = view.findViewById(R.id.textViewExercises)
 
+        loadExercise(selectedDate) // Laddar dagens övning
+
         // Lyssnar på datumändring
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
-            selectedDate = calendar.timeInMillis
+            calendar.set(year, month, dayOfMonth, 0, 0, 0)
+            selectedDate = getFormattedDate(calendar.timeInMillis)
 
-            editTextExercise.setText(exerciseMap[selectedDate] ?: "")
-            textViewExercises.text = "Dagens övning: ${exerciseMap[selectedDate] ?: "Ingen än"}"
+            loadExercise(selectedDate) // Ladda övning för valt datum
         }
 
-        // Sparar övningen
+        // Sparar övningen i Firestore
         btnSave.setOnClickListener {
             val exercise = editTextExercise.text.toString()
             if (exercise.isNotEmpty()) {
-                exerciseMap[selectedDate] = exercise
-                textViewExercises.text = "Dagens övning: $exercise"
-                editTextExercise.text.clear()
-                Toast.makeText(requireContext(), "Övning sparad!", Toast.LENGTH_SHORT).show()
+                saveExercise(selectedDate, exercise)
             } else {
                 Toast.makeText(requireContext(), "Skriv in en övning först", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun getFormattedDate(timeInMillis: Long): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return sdf.format(Date(timeInMillis))
+    }
+
+    private fun saveExercise(date: String, exercise: String) {
+        val exerciseData = hashMapOf("exercise" to exercise)
+
+        db.collection("exercises").document(date)
+            .set(exerciseData)
+            .addOnSuccessListener {
+                textViewExercises.text = "Dagens övning: $exercise"
+                editTextExercise.text.clear()
+                Toast.makeText(requireContext(), "Övning sparad!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Misslyckades att spara", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun loadExercise(date: String) {
+        db.collection("exercises").document(date)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val exercise = document.getString("exercise") ?: ""
+                    textViewExercises.text = "Dagens övning: $exercise"
+                    editTextExercise.setText(exercise)
+                } else {
+                    textViewExercises.text = "Dagens övning: Ingen än"
+                    editTextExercise.setText("")
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Misslyckades att ladda övning", Toast.LENGTH_SHORT).show()
+            }
     }
 }

@@ -121,4 +121,11 @@
             app:destination="@id/categoriesFragment" />
     </fragment>
 
+    <!-- Favorites Fragment: sidan med favoritövningar -->
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.homefit.ui.favorites.FavoritesFragment"
+        android:label="Mina Favoriter"
+        tools:layout="@layout/fragment_favorites" />
+
 </navigation>

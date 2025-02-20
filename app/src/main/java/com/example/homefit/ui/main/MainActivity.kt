@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.profileFragment) // Navigera till ProfileFragment
                 }
                 R.id.nav_calendar -> {
-                    // TODO: Navigera till CalendarFragment
+                    navController.navigate(R.id.calenderFragment)
                 }
                 R.id.nav_logout -> {
                     FirebaseAuth.getInstance().signOut()

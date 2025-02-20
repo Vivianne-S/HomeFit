@@ -98,5 +98,7 @@ class CalenderFragment : Fragment() {
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Misslyckades att ladda övning", Toast.LENGTH_SHORT).show()
             }
+
     }
+
 }

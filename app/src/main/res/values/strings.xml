@@ -4,6 +4,7 @@
 
     <!--  Fragment tile names -->
     <string name="categories_title">Categories</string>
+    <string name="calendar_title">Calendar</string>
 
     <!-- Welcome messages -->
     <string name="welcome_message_journey">Your Fitness Journey Begins</string>
@@ -69,7 +70,11 @@
 
     <!-- Category Image -->
     <string name="category_image_description">Chair Dips icon</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Calendar Fragment Strings -->
+    <string name="enter_exercise_hint">Enter completed Exercise:</string>
+    <string name="save_exercise_button">Save Exercise</string>
+    <string name="exercises_of_day">Exercises for the day:</string>
+
 
 </resources>

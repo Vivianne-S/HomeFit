@@ -1,9 +1,11 @@
 package com.example.homefit.ui.calendar
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
@@ -43,6 +45,7 @@ class CalenderFragment : Fragment() {
         btnSave = view.findViewById(R.id.btnSave)
         textViewExercises = view.findViewById(R.id.textViewExercises)
 
+
         loadExercise(selectedDate) // Laddar dagens övning
 
         // Lyssnar på datumändring
@@ -50,7 +53,6 @@ class CalenderFragment : Fragment() {
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth, 0, 0, 0)
             selectedDate = getFormattedDate(calendar.timeInMillis)
-
             loadExercise(selectedDate) // Ladda övning för valt datum
         }
 
@@ -76,7 +78,7 @@ class CalenderFragment : Fragment() {
         db.collection("exercises").document(date)
             .set(exerciseData)
             .addOnSuccessListener {
-                textViewExercises.text = "Dagens övning: $exercise"
+                textViewExercises.text = "Exercises for the day: $exercise"
                 editTextExercise.text.clear()
                 Toast.makeText(requireContext(), "Övning sparad!", Toast.LENGTH_SHORT).show()
             }
@@ -93,11 +95,11 @@ class CalenderFragment : Fragment() {
                     val userId = document.getString("userID") ?: ""
                     if (userId == currentUserId) {
                         val exercise = document.getString("exercise") ?: ""
-                        textViewExercises.text = "Dagens övning: $exercise"
+                        textViewExercises.text = "Exercises for the day $exercise"
                         editTextExercise.setText(exercise)
                     }
                 } else {
-                    textViewExercises.text = "Dagens övning: Ingen än"
+                    textViewExercises.text = "Exercises for the day:"
                     editTextExercise.setText("")
                 }
             }

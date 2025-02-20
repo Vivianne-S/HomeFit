@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_categoriesFragment_to_legs_exercisesFragment"
             app:destination="@id/legs_exercisesFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_arm_exercisesFragment"
+            app:destination="@id/arm_exercisesFragment" />
     </fragment>
 
     <!-- Exercises Fragment: Sidan med övningar -->
@@ -77,29 +80,44 @@
         android:id="@+id/arm_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.ArmsExercisesFragment"
         tools:layout="@layout/fragment_arms_exercises">
+        <action
+            android:id="@+id/action_arm_exercisesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/back_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.BackExercisesFragment"
         tools:layout="@layout/fragment_back_exercises">
+        <action
+            android:id="@+id/action_back_exercisesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/chest_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.ChestExercisesFragment"
         tools:layout="@layout/fragment_chest_exercises">
+        <action
+            android:id="@+id/action_chest_exercisesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/core_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.CoreExercisesFragment"
         tools:layout="@layout/fragment_core_exercises">
+        <action
+            android:id="@+id/action_core_exercisesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
     </fragment>
     <fragment
         android:id="@+id/legs_exercisesFragment"
         android:name="com.example.homefit.ui.exercises.LegsExercisesFragment"
         tools:layout="@layout/fragment_legs_exercises">
+        <action
+            android:id="@+id/action_legs_exercisesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
     </fragment>
 
     <!-- Profile Fragment: Profilsidan -->
@@ -111,6 +129,16 @@
             android:id="@+id/action_profileFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
     </fragment>
+
+    <!-- Workout Fragment: Sidan med Workouts -->
+    <fragment
+        android:id="@+id/Workout_Fragment"
+        android:name="com.example.homefit.ui.workout.WorkoutFragment"
+        tools:layout="@layout/fragment_workout">
+    </fragment>
+
+
+
     <!-- Favorite Fragment: Profilsidan -->
     <fragment
         android:id="@+id/calenderFragment"

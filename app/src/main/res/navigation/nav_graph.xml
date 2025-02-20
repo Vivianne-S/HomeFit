@@ -76,5 +76,14 @@
             android:id="@+id/action_profileFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
     </fragment>
+    <!-- Favorite Fragment: Profilsidan -->
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.example.homefit.ui.calendar.CalenderFragment"
+        tools:layout="@layout/fragment_calender">
+        <action
+            android:id="@+id/action_nav_favorites_to_calendarFragment"
+            app:destination="@id/categoriesFragment" />
+    </fragment>
 
 </navigation>

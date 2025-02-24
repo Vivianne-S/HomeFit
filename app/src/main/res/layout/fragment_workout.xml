@@ -44,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView_workout"
         app:layout_constraintHorizontal_bias="0.981"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_marginTop="72dp" />
 
     <!-- Favorite Button -->
@@ -52,6 +53,7 @@
         android:layout_width="37dp"
         android:layout_height="38dp"
         android:src="@drawable/baseline_favorite_border_24"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/imageButton_video"

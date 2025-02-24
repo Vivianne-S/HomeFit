@@ -70,9 +70,6 @@
         <action
             android:id="@+id/action_categoriesFragment_to_legs_exercisesFragment"
             app:destination="@id/legs_exercisesFragment" />
-        <action
-            android:id="@+id/action_categoriesFragment_to_arm_exercisesFragment"
-            app:destination="@id/arm_exercisesFragment" />
     </fragment>
 
     <!-- Exercises Fragment: Sidan med övningar -->
@@ -135,6 +132,9 @@
         android:id="@+id/Workout_Fragment"
         android:name="com.example.homefit.ui.workout.WorkoutFragment"
         tools:layout="@layout/fragment_workout">
+        <argument
+            android:name="Workout"
+            android:defaultValue="1" />
     </fragment>
 
 

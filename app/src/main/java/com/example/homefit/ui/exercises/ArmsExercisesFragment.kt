@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentArmsExercisesBinding
@@ -16,6 +17,7 @@ class ArmsExercisesFragment : Fragment() {
 
     private var _binding: FragmentArmsExercisesBinding? = null
     private val binding get() = _binding!!
+    lateinit var action : NavDirections
 
     companion object {
         fun newInstance() = ArmsExercisesFragment()
@@ -45,27 +47,32 @@ class ArmsExercisesFragment : Fragment() {
 
         //clicklistener for Arms Category
         cardViewDips.setOnClickListener {
-            findNavController().navigate(R.id.action_arm_exercisesFragment_to_Workout_Fragment)
+            action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(1)
+            findNavController().navigate(action)
         }
 
         //clicklistener for Legs Category
         cardViewCircle.setOnClickListener {
-            findNavController().navigate(R.id.action_arm_exercisesFragment_to_Workout_Fragment)
+            action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(2)
+            findNavController().navigate(action)
         }
 
         //clicklistener for Chest Category
         cardViewChat.setOnClickListener {
-            findNavController().navigate(R.id.action_arm_exercisesFragment_to_Workout_Fragment)
+            action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(3)
+            findNavController().navigate(action)
         }
 
         //clicklistener for Back Category
         cardViewWallAngels.setOnClickListener {
-            findNavController().navigate(R.id.action_arm_exercisesFragment_to_Workout_Fragment)
+            action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(4)
+            findNavController().navigate(action)
         }
 
         //clicklistener for Core Category
         cardViewLatRaises.setOnClickListener {
-            findNavController().navigate(R.id.action_arm_exercisesFragment_to_Workout_Fragment)
+            action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(5)
+            findNavController().navigate(action)
         }
 
     }

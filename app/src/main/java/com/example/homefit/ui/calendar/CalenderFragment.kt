@@ -76,8 +76,9 @@ class CalenderFragment : Fragment() {
         val exerciseData = hashMapOf("exercise" to exercise, "userID" to userID, "timestamp" to System.currentTimeMillis())
 
         // Lägg till övningen i underkollektionen "exercises" för det valda datumet
-        db.collection("exercises").document(date)
-            .collection("exercises")
+        db.collection("users").document(userID)
+            .collection("exercises").document(date)
+            .collection("exercisesList")
             .add(exerciseData)
             .addOnSuccessListener {
                 textViewExercises.text = "Exercise saved: $exercise"
@@ -92,8 +93,9 @@ class CalenderFragment : Fragment() {
     }
 
     private fun loadExercise(date: String) {
-        db.collection("exercises").document(date)
-            .collection("exercises")
+        db.collection("users").document(currentUserId)
+            .collection("exercises").document(date)
+            .collection("exercisesList")
             .whereEqualTo("userID", currentUserId)
             .get()
             .addOnSuccessListener { documents ->

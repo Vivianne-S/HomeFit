@@ -73,40 +73,46 @@ class CalenderFragment : Fragment() {
     }
 
     private fun saveExercise(date: String, exercise: String, userID: String) {
-        val exerciseData = hashMapOf("exercise" to exercise, "userID" to userID)
+        val exerciseData = hashMapOf("exercise" to exercise, "userID" to userID, "timestamp" to System.currentTimeMillis())
 
+        // Lägg till övningen i underkollektionen "exercises" för det valda datumet
         db.collection("exercises").document(date)
-            .set(exerciseData)
+            .collection("exercises")
+            .add(exerciseData)
             .addOnSuccessListener {
-                textViewExercises.text = "Exercises for the day: $exercise"
+                textViewExercises.text = "Exercise saved: $exercise"
                 editTextExercise.text.clear()
-                Toast.makeText(requireContext(), "Övning sparad!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Exercise saved!", Toast.LENGTH_SHORT).show()
+                loadExercise(selectedDate) // Ladda om övningarna för att visa den nya övningen
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Misslyckades att spara", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to save exercise", Toast.LENGTH_SHORT).show()
             }
+
     }
 
     private fun loadExercise(date: String) {
         db.collection("exercises").document(date)
+            .collection("exercises")
+            .whereEqualTo("userID", currentUserId)
             .get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val userId = document.getString("userID") ?: ""
-                    if (userId == currentUserId) {
-                        val exercise = document.getString("exercise") ?: ""
-                        textViewExercises.text = "Exercises for the day $exercise"
-                        editTextExercise.setText(exercise)
-                    }
-                } else {
-                    textViewExercises.text = "Exercises for the day:"
-                    editTextExercise.setText("")
+            .addOnSuccessListener { documents ->
+                val exercises = mutableListOf<String>()
+                for (document in documents) {
+                    val exercise = document.getString("exercise") ?: ""
+                    exercises.add(exercise)
                 }
+                if (exercises.isNotEmpty()) {
+                    textViewExercises.text = "Exercises for the day:\n${exercises.joinToString("\n")}"
+                } else {
+                    textViewExercises.text = "No exercises saved for this day."
+                }
+                editTextExercise.setText("")
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Misslyckades att ladda övning", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to load exercises", Toast.LENGTH_SHORT).show()
             }
-
     }
-
 }
+
+

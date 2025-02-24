@@ -1,14 +1,15 @@
 package com.example.homefit.ui.exercises
 
+import android.app.Notification.Action
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
-import com.example.homefit.databinding.FragmentCoreExercisesBinding
 import com.example.homefit.databinding.FragmentLegsExercisesBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +25,7 @@ private const val ARG_PARAM2 = "param2"
 class LegsExercisesFragment : Fragment() {
     private var _binding: FragmentLegsExercisesBinding? = null
     private val binding get() = _binding!!
+    lateinit var action : NavDirections
 
     companion object {
         fun newInstance() = LegsExercisesFragment()
@@ -55,31 +57,26 @@ class LegsExercisesFragment : Fragment() {
         val cardViewGlute: CardView = binding.glutebrideCardview
         val cardViewSplit: CardView = binding.splitsquatsCardview
 
-        //clicklistener for Arms Category
         cardViewSquats.setOnClickListener {
-            findNavController().navigate(R.id.action_legs_exercisesFragment_to_Workout_Fragment)
+            action = LegsExercisesFragmentDirections.actionLegsExercisesFragmentToWorkoutFragment(6)
+            findNavController().navigate(action)
         }
-
-        //clicklistener for Legs Category
-        cardViewSide.setOnClickListener {
-            findNavController().navigate(R.id.action_legs_exercisesFragment_to_Workout_Fragment)
-        }
-
-        //clicklistener for Chest Category
-        cardViewCalf.setOnClickListener {
-            findNavController().navigate(R.id.action_legs_exercisesFragment_to_Workout_Fragment)
-        }
-
-        //clicklistener for Back Category
-        cardViewGlute.setOnClickListener {
-            findNavController().navigate(R.id.action_legs_exercisesFragment_to_Workout_Fragment)
-        }
-
-        //clicklistener for Core Category
         cardViewSplit.setOnClickListener {
-            findNavController().navigate(R.id.action_legs_exercisesFragment_to_Workout_Fragment)
+            action = LegsExercisesFragmentDirections.actionLegsExercisesFragmentToWorkoutFragment(7)
+            findNavController().navigate(action)
         }
-
+        cardViewGlute.setOnClickListener {
+            action = LegsExercisesFragmentDirections.actionLegsExercisesFragmentToWorkoutFragment(8)
+            findNavController().navigate(action)
+        }
+        cardViewSide.setOnClickListener {
+            action = LegsExercisesFragmentDirections.actionLegsExercisesFragmentToWorkoutFragment(9)
+            findNavController().navigate(action)
+        }
+        cardViewCalf.setOnClickListener {
+            action = LegsExercisesFragmentDirections.actionLegsExercisesFragmentToWorkoutFragment(10)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {

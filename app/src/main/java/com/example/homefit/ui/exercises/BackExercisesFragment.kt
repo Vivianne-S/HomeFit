@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentArmsExercisesBinding
@@ -27,6 +28,7 @@ class BackExercisesFragment : Fragment() {
 
     private var _binding: FragmentBackExercisesBinding? = null
     private val binding get() = _binding!!
+    lateinit var action : NavDirections
 
     companion object {
         fun newInstance() = BackExercisesFragment()
@@ -58,31 +60,26 @@ class BackExercisesFragment : Fragment() {
         val cardViewReverseFlys: CardView = binding.reverseflysCardview
         val cardViewReversePlank: CardView = binding.reverseplankCardview
 
-        //clicklistener for Arms Category
         cardViewSuper.setOnClickListener {
-            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+            action = BackExercisesFragmentDirections.actionBackExercisesFragmentToWorkoutFragment(16)
+            findNavController().navigate(action)
         }
-
-        //clicklistener for Legs Category
-        cardViewCatCow.setOnClickListener {
-            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
-        }
-
-        //clicklistener for Chest Category
         cardViewGood.setOnClickListener {
-            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+            action = BackExercisesFragmentDirections.actionBackExercisesFragmentToWorkoutFragment(17)
+            findNavController().navigate(action)
         }
-
-        //clicklistener for Back Category
-        cardViewReverseFlys.setOnClickListener {
-            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
-        }
-
-        //clicklistener for Core Category
         cardViewReversePlank.setOnClickListener {
-            findNavController().navigate(R.id.action_back_exercisesFragment_to_Workout_Fragment)
+            action = BackExercisesFragmentDirections.actionBackExercisesFragmentToWorkoutFragment(18)
+            findNavController().navigate(action)
         }
-
+        cardViewCatCow.setOnClickListener {
+            action = BackExercisesFragmentDirections.actionBackExercisesFragmentToWorkoutFragment(19)
+            findNavController().navigate(action)
+        }
+        cardViewReverseFlys.setOnClickListener {
+            action = BackExercisesFragmentDirections.actionBackExercisesFragmentToWorkoutFragment(20)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {

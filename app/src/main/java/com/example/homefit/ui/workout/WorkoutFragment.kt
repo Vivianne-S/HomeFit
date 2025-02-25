@@ -33,7 +33,7 @@ class WorkoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWorkoutBinding.inflate(inflater, container, false)
-        
+
         val imgView = binding.imageViewWorkout
         val wrkDescription = binding.workoutDescription
         val wrkName = binding.workoutName
@@ -263,12 +263,42 @@ class WorkoutFragment : Fragment() {
         val workoutName = binding.workoutName.text.toString()
         val workoutDescription = binding.workoutDescription.text.toString()
 
-        // Sätt upp en click listener för favorit-knappen
         binding.imageButtonFavorite.setOnClickListener {
-            // Spara övningen som favorit (utan bild)
-            workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, ""))
+            val workoutName = binding.workoutName.text.toString()
+            val workoutDescription = binding.workoutDescription.text.toString()
+            val workoutImageResId = when (args.Workout) {
+                1 -> R.drawable.dips2
+                2 -> R.drawable.armcirlces1
+                3 -> R.drawable.chatauranga2
+                4 -> R.drawable.wallangel2
+                5 -> R.drawable.armlateralraises2
+                6 -> R.drawable.squat
+                7 -> R.drawable.splitsquats2
+                8 -> R.drawable.glutebridge2
+                9 -> R.drawable.sidelunge
+                10 -> R.drawable.calfraises2
+                11 -> R.drawable.pushups2
+                12 -> R.drawable.widepushups2
+                13 -> R.drawable.burpees2
+                14 -> R.drawable.inclinepushup2
+                15 -> R.drawable.declinepushup2
+                16 -> R.drawable.superman2
+                17 -> R.drawable.goodmorning2
+                18 -> R.drawable.reverseplank
+                19 -> R.drawable.cat
+                20 -> R.drawable.reverseflys2
+                21 -> R.drawable.plank
+                22 -> R.drawable.crunches2
+                23 -> R.drawable.bcrunches2
+                24 -> R.drawable.legraises2
+                25 -> R.drawable.heeltap1
+                else -> R.drawable.default_workout_image // Fallback om inget matchar
+            }
 
-            // Ändra hjärtikonen till röd när knappen trycks
+            // Spara favorit med bildens resurs-ID
+            workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId))
+
+            // Ändra hjärtikonen till röd
             binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
         }
     }

@@ -15,6 +15,7 @@ class WorkoutViewModel : ViewModel() {
     private val _favoriteStatus = MutableLiveData<String>()
     val favoriteStatus: LiveData<String> get() = _favoriteStatus
 
+
     // Metod för att spara favorit
     fun saveFavorite(workoutData: WorkoutData) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -26,15 +27,15 @@ class WorkoutViewModel : ViewModel() {
         val db = FirebaseFirestore.getInstance()
 
         // Lägg till övningen i Firestore under användarens "favorites"-samling
-        db.collection("users").document(userId)  // Använd userId för att skapa en användarspecifik samling
-            .collection("favorites")  // Samlingen för favoriter
+        db.collection("users").document(userId)
+            .collection("favorites")
             .document(workoutData.name)  // Använd övningens namn som dokument-ID
-            .set(workoutData)  // Sätt datan för övningen i Firestore
+            .set(workoutData)  // Spara hela WorkoutData-objektet
             .addOnSuccessListener {
-                _favoriteStatus.value = "Exercise is saved to favorites"
+                _favoriteStatus.value = "Exercise saved to favorites"
             }
             .addOnFailureListener { e ->
-                _favoriteStatus.value = "Faild to save exercise to favorites: ${e.message}"
+                _favoriteStatus.value = "Failed to save exercise: ${e.message}"
             }
     }
 }

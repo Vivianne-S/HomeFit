@@ -68,10 +68,10 @@ class FavoritesFragment : Fragment() {
                     val name = document.getString("name") ?: continue
                     val description = document.getString("description") ?: ""
                     val calories = document.getLong("caloriesBurned")?.toInt() ?: 0
-                    val imageUrl = document.getString("imageUrl") ?: "" // Om imageUrl finns
+                    val imageResId = document.getLong("imageResId")?.toInt() ?: R.drawable.default_workout_image
 
                     // Skapa ett WorkoutData-objekt med hämtad information
-                    val workoutData = WorkoutData(name, description, calories, imageUrl)
+                    val workoutData = WorkoutData(name, description, calories,imageResId)
 
                     // Lägg till övningen i listan
                     favoritesList.add(workoutData)

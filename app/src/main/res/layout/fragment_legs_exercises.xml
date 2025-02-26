@@ -1,287 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.categories.CategoriesFragment"
     android:background="@drawable/app_background"
-    android:orientation="vertical"
-    >
+    tools:context=".ui.categories.CategoriesFragment">
 
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/squats_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_squats"
-                    android:src="@drawable/squat"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/app_background"
+                android:layout_gravity="center"
+                android:elevation="4dp"
+                app:titleTextColor="@android:color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <TextView
-                    android:id="@+id/tv_squats"
-                    android:text="Squats"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/arrow_arms"
-                    android:layout_gravity="center_vertical"
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    android:text="@string/toolbar_title_leg_exercises"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </androidx.appcompat.widget.Toolbar>
 
-            </LinearLayout>
+            <Space android:layout_width="match_parent" android:layout_height="20dp"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/splitsquats_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Squats -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/squats_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_splitsquats"
-                    android:src="@drawable/splitsquats2"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_splitsquats"
-                    android:text="Split Squats"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_legs"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_squats"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/squat"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_squats"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_squats"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_arms"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/glutebride_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Split Squats -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/splitsquats_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_glutebridge"
-                    android:src="@drawable/glutebridge1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_glutebridge"
-                    android:text="Glute bridge"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_chest"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_splitsquats"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/splitsquats2"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_splitsquats"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_split_squats"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_legs"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/sidelunge_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Glute Bridge -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/glutebride_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_sidelunge"
-                    android:src="@drawable/sidelunge"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_sidelunge"
-                    android:text="Side Lunge"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_backexercise"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_glutebridge"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/glutebridge1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_glutebridge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_glute_bridge"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_chest"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/calfraises_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Side Lunge -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sidelunge_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_calfraises"
-                    android:src="@drawable/calfraises2"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_calfraises"
-                    android:text="Calf Raises"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_core"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_sidelunge"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sidelunge"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_sidelunge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_side_lunge"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_backexercise"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <!-- Calf Raises -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/calfraises_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/image_calfraises"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/calfraises2"/>
+
+                    <TextView
+                        android:id="@+id/tv_calfraises"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_calf_raises"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/arrow_core"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

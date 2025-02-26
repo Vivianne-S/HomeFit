@@ -1,287 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.categories.CategoriesFragment"
     android:background="@drawable/app_background"
-    android:orientation="vertical"
-    >
+    tools:context=".ui.categories.CategoriesFragment">
 
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/chairdips_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/imageview_chairDips"
-                    android:src="@drawable/dips1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/app_background"
+                android:layout_gravity="center"
+                android:elevation="4dp"
+                app:titleTextColor="@android:color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <TextView
-                    android:id="@+id/tv_ChairDips"
-                    android:text="Chair Dips"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/arrow_arms"
-                    android:layout_gravity="center_vertical"
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    android:text="@string/toolbar_title_arms"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </androidx.appcompat.widget.Toolbar>
 
-            </LinearLayout>
+            <Space android:layout_width="match_parent" android:layout_height="20dp"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/armcircle_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Chair Dips -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chairdips_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_armcircles"
-                    android:src="@drawable/armcirlces1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_armcircles"
-                    android:text="Arm Circles"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_legs"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/imageview_chairDips"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/dips1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_ChairDips"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_chair_dips"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_arms"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/chataurunga_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Arm Circles -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/armcircle_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_chataurunga"
-                    android:src="@drawable/chatauranga1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_chataurunga"
-                    android:text="Chautaranga Push-ups"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_chest"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_armcircles"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/armcirlces1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_armcircles"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_arm_circles"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_legs"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/wallangels_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Chautaranga Push-ups -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chataurunga_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_wallangels"
-                    android:src="@drawable/wallangels1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_wallangels"
-                    android:text="Wall Angels"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_backexercise"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_chataurunga"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chatauranga1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_chataurunga"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_chautaranga_pushups"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_chest"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/armlateralraises_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Wall Angels -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wallangels_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_armlateralraises"
-                    android:src="@drawable/armlateralraises2"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_category_core"
-                    android:text="Arm Lateral Raises"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_core"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_wallangels"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/wallangels1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_wallangels"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_wall_angels"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_backexercise"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <!-- Arm Lateral Raises -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/armlateralraises_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/image_armlateralraises"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/armlateralraises2"/>
+
+                    <TextView
+                        android:id="@+id/tv_category_core"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_arm_lateral_raises"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/arrow_core"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

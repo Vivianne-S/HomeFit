@@ -103,7 +103,7 @@
 
         <!-- Start Timer Button -->
         <Button
-            android:id="@+id/stop_timer_btn"
+            android:id="@+id/start_timer_btn"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
 
         <!-- Stop Timer Button -->
         <Button
-            android:id="@+id/start_timer_btn"
+            android:id="@+id/stop_timer_btn"
             android:text="@string/workout_timer_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

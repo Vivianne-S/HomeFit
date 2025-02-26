@@ -1,5 +1,6 @@
 package com.example.homefit.ui.workout
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,19 +15,24 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentWorkoutBinding
 import com.example.homefit.ui.data.WorkoutData
+import com.example.homefit.ui.profile.ProfileViewModel
+import com.example.homefit.ui.workout.WorkoutViewModel
 
 class WorkoutFragment : Fragment() {
     private var _binding: FragmentWorkoutBinding? = null
     private val binding get() = _binding!!
+    private var metValue: Double = 0.0
+
+    // ViewModel-instans
+    private lateinit var workoutViewModel: WorkoutViewModel
+    private lateinit var profileViewModel: ProfileViewModel
+
     val args : WorkoutFragmentArgs by navArgs()
 
 
     companion object {
         fun newInstance() = WorkoutFragment()
     }
-
-    // ViewModel-instans
-    private lateinit var workoutViewModel: WorkoutViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +49,7 @@ class WorkoutFragment : Fragment() {
         if(workoutNr == 1){
             imgView.setImageResource(R.drawable.dips2)
             wrkName.text = "Chair Dips"
+            metValue = 5.0 // MET-värde för dips
             wrkDescription.text = "1.Sit on the edge of a bench or chair, hands supporting your weight. \n" +
                     "2.Position your feet away from the bench, legs straight and heels on the floor. \n" +
                     "3.Lower yourself until your upper arms are parallel to the ground, then push back up.\n" +
@@ -51,6 +58,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 2){
             imgView.setImageResource(R.drawable.armcirlces1)
             wrkName.text = "Arm Circles"
+            metValue = 3.5
             wrkDescription.text = "1.Stand up straight, with your feet shoulder-width apart and your hands out and parallel to the floor.\n" +
                     "2.Make small circles using your whole arm, being sure to keep your back straight.\n" +
                     "3.Start making larger circles with your arm, keeping your movement controlled.\n" +
@@ -58,6 +66,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 3){
             imgView.setImageResource(R.drawable.chatauranga2)
             wrkName.text = "Chaturanga"
+            metValue = 4.0
             wrkDescription.text = "1.Start in a high plank with shoulders over wrists, hips aligned, and legs straight. Inhale, shift forward on toes, and engage your core. \n" +
                     "2.Lower down by bending elbows to 90°, keeping chest and hips aligned. \n" +
                     "3.Exhale, press palms to lift chest and hips, straightening your arms.\n" +
@@ -65,6 +74,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 4){
             imgView.setImageResource(R.drawable.wallangel2)
             wrkName.text = "Wall Angels"
+            metValue = 2.5
             wrkDescription.text = "1.Stand tall with your back against a wall and feet slightly forward. \n" +
                     "2.Place the backs of your hands and arms against the wall at head height. \n" +
                     "3.Slide your arms up, then back down to the starting position.\n" +
@@ -72,6 +82,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 5){
             imgView.setImageResource(R.drawable.armlateralraises2)
             wrkName.text = "Arm Lateral Raises"
+            metValue = 3.5
             wrkDescription.text = "1.Stand tall with your feet shoulder-width apart, knees slightly bent. Let your arms hang naturally by your sides with your palms facing your body.\n" +
                     "2.Engage your core muscles and maintain a slight bend in your elbows throughout the exercise.\n" +
                     "3.Keeping your back straight and your shoulders relaxed, lift both arms out to the sides until they are parallel to the floor.\n" +
@@ -82,6 +93,7 @@ class WorkoutFragment : Fragment() {
         }else if(workoutNr == 6){
             imgView.setImageResource(R.drawable.squat)
             wrkName.text = "Squats"
+            metValue = 5.0
             wrkDescription.text = "1.Start by standing with your feet just about shoulder width\n" +
                     "2.Begin by pushing your hips back while bending at the knee, as if you were about to sit down.\n" +
                     "3.Squat down until your thighs are at least parallel with the floor, or below if you can.\n" +
@@ -91,6 +103,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 7){
             imgView.setImageResource(R.drawable.splitsquats2)
             wrkName.text = "Split Squats"
+            metValue = 4.5
             wrkDescription.text = "1.Stand with your feet hip-width apart and take a big step forward with your right foot.\n" +
                     "2.Lower your body down until your right thigh is parallel to the ground and your left knee is hovering just above the floor.\n" +
                     "3.Push through your right heel to stand back up to the starting position.\n" +
@@ -99,6 +112,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 8){
             imgView.setImageResource(R.drawable.glutebridge2)
             wrkName.text = "Glute Bridge"
+            metValue = 4.0
             wrkDescription.text = "1.Start by lying on your back on a mat or bench with your knees bent and feet flat on the ground.\n" +
                     "2.Engage your glutes and lift your hips up towards the ceiling, keeping your feet and shoulders on the ground.\n" +
                     "3.Pause at the top of the movement, squeezing your glutes tightly.\n" +
@@ -107,6 +121,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 9){
             imgView.setImageResource(R.drawable.sidelunge)
             wrkName.text = "Side Lunge"
+            metValue = 4.5
             wrkDescription.text = "1.Stand with your feet hip-width apart and your hands on your hips.\n" +
                     "2.Take a big step to the right with your right foot, keeping your left foot in place.\n" +
                     "3.Bend your right knee and push your hips back as you lower your body into a lunge position.\n" +
@@ -117,6 +132,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 10){
             imgView.setImageResource(R.drawable.calfraises2)
             wrkName.text = "Calf Raises"
+            metValue = 3.5
             wrkDescription.text = "1.Stand on an flat or elevated surface such as a step with your heels hanging off.\n" +
                     "2.Hold onto a stable object such as a railing or wall for balance.\n" +
                     "3.Raise your heels up as high as possible, squeezing your calf muscles at the top of the movement.\n" +
@@ -125,6 +141,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 11){
             imgView.setImageResource(R.drawable.pushups2)
             wrkName.text = "Push-Ups"
+            metValue = 4.0
             wrkDescription.text = "1.Start in a high plank position. Place your hands on the ground and position them shoulder width apart (or slightly wider).\n" +
                     "2.With control, bend your elbows to lower your entire body toward the ground.\n" +
                     "3.Lower as far as you can while keeping your body in one straight line.\n" +
@@ -133,6 +150,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 12){
             imgView.setImageResource(R.drawable.widepushups2)
             wrkName.text = "Wide Push-Ups"
+            metValue = 4.2
             wrkDescription.text ="1.Start in plank position with your hands wider than your shoulders. \n" +
                     "2.Face your fingers forward or slightly to the outside. \n" +
                     "3.Slowly bend your elbows out to the side as you lower your body toward the floor. \n" +
@@ -142,6 +160,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 13){
             imgView.setImageResource(R.drawable.burpees2)
             wrkName.text = "Burpees"
+            metValue = 8.0
             wrkDescription.text = "1.Begin in a standing position. Position your feet shoulder-width apart.\n" +
                     "2.Drop into a squat.\n" +
                     "3.Kick your legs back into a high plank position.\n" +
@@ -153,6 +172,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 14){
             imgView.setImageResource(R.drawable.inclinepushup2)
             wrkName.text = "Incline Push-Ups"
+            metValue = 3.8
             wrkDescription.text = "1.Perform the incline push-up with your hands on a bench, countertop, stability ball, or other elevated surface. \n" +
                     "2.Hold your body in a high plank position, keeping your back and legs in a straight line. \n" +
                     "3.Bend your elbows, and lower your body with the same movement pattern you would use for a traditional push-up." +
@@ -160,6 +180,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 15){
             imgView.setImageResource(R.drawable.declinepushup2)
             wrkName.text = "Decline Push-Ups"
+            metValue = 4.2
             wrkDescription.text = "1.Kneel down with your back to the bench. Put your hands on the floor, shoulders over your wrists and elbows at 45 degrees. Place your feet on top of the bench.\n" +
                     "2.Brace your core, glutes, and quads. Bend your elbows and lower your chest to the floor, keeping your back and neck straight.\n" +
                     "3.Push into the floor to return to starting position, extending your elbows.\n" +
@@ -167,6 +188,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 16){
             imgView.setImageResource(R.drawable.superman2)
             wrkName.text = "Superman"
+            metValue = 3.0
             wrkDescription.text = "1.Lie on the floor face down, with your legs straight and your arms extended in front of you.\n" +
                     "2.Keeping your head in a neutral position, slowly lift your arms and legs off the floor until you feel your lower back muscles contracting. \n" +
                     "3.Aim to lift your belly button slightly off the floor to contract your abs. A good way to picture this is to imagine you’re Superman flying in the air.\n" +
@@ -176,6 +198,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 17){
             imgView.setImageResource(R.drawable.goodmorning2)
             wrkName.text = "Good Morning"
+            metValue = 3.5
             wrkDescription.text = "1.With feet hip-width apart, stand upright, knees slightly bent, and place your hands at the back of your head, elbows opened wide.\n" +
                     "2.Engage your abdominal muscles by pulling them into your spine. Keeping your spine neutral and pressing your rear backward, bend forward at the hips and continue doing so until your back is nearly parallel to the floor.\n" +
                     "3.Slowly return to standing, engaging your core and squeezing your glutes at the top of the movement. \n" +
@@ -183,6 +206,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 18){
             imgView.setImageResource(R.drawable.reverseplank)
             wrkName.text = "Reverse Plank"
+            metValue = 3.0
             wrkDescription.text = "1.Start by sitting on the floor with your legs extended in front of you.\n" +
                     "2.Place your hands on the floor behind you, with your fingers pointing towards your feet.\n" +
                     "3.Press into your hands and lift your hips off the ground, coming into a reverse tabletop position.\n" +
@@ -193,6 +217,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 19){
             imgView.setImageResource(R.drawable.cat)
             wrkName.text = "Cat Cow"
+            metValue = 2.0
             wrkDescription.text = "1.Start on your hands and knees with your wrists directly under your shoulders and your knees directly under your hips.\n" +
                     "2.Inhale and arch your back, lifting your head and tailbone towards the ceiling. This is the “cat” position.\n" +
                     "3.Exhale and round your spine, tucking your chin to your chest and bringing your tailbone towards your knees. This is the “cow” position.\n" +
@@ -203,6 +228,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 20){
             imgView.setImageResource(R.drawable.reverseflys2)
             wrkName.text = "Reverse Flys"
+            metValue = 4.0
             wrkDescription.text = "1.Stand with your legs shoulder-width apart.\n" +
                     "2.Place your arms just next to your sides.\n" +
                     "3.Bend your body at the waist until your upper body gets parallel to the ground.\n" +
@@ -212,12 +238,14 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 21){
             imgView.setImageResource(R.drawable.plank)
             wrkName.text = "Plank"
+            metValue = 3.3
             wrkDescription.text = "1.Push into your forearms to lift your body, forming a straight line from head to feet. \n" +
                     "2.Start facedown, complete the movement, and repeat.\n" +
                     "\nContinue for the desired number of reps or time."
         }else if (workoutNr == 22){
             imgView.setImageResource(R.drawable.crunches2)
             wrkName.text = "Crunches"
+            metValue = 3.8
             wrkDescription.text = "1.Lie on your back with bent legs and a stable lower body. \n" +
                     "2.Cross your hands to your shoulders or place them behind your ears. \n" +
                     "3.Lift your head and shoulders, then lower back down to the start.\n" +
@@ -225,6 +253,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 23){
             imgView.setImageResource(R.drawable.bcrunches2)
             wrkName.text = "Bicycle Crunches"
+            metValue = 4.0
             wrkDescription.text = "1.Engage your core, hold your head gently, and lift your knees to a 90° angle. \n" +
                     "2.Exhale and pedal your legs, bringing one knee toward your armpit while straightening the other. \n" +
                     "3.Twist your torso to touch your elbow to the opposite knee. \n" +
@@ -232,6 +261,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 24){
             imgView.setImageResource(R.drawable.legraises2)
             wrkName.text = "Leg Raises"
+            metValue = 3.5
             wrkDescription.text = "1.Lie flat on your back on a mat with legs extended and arms by your sides, hands pressed into the floor or holding a fixed object. \n" +
                     "2.Engage your core by pulling your belly button in and exhale as you lift your legs to 90° from the floor. Stop when your lower back begins to lift.\n" +
                     "3.Then inhale as you lower your legs while keeping your lower back on the ground and feet hovering above the floor. Maintain core engagement throughout.\n" +
@@ -239,6 +269,7 @@ class WorkoutFragment : Fragment() {
         }else if (workoutNr == 25){
             imgView.setImageResource(R.drawable.heeltap1)
             wrkName.text = "Heel Taps"
+            metValue = 3.0
             wrkDescription.text = "1.Engage your abs and obliques as you inhale and lift your shoulder blades and head. \n" +
                     "2.Bend to the right, reaching your right hand to tap your right heel while exhaling. Keep the movement controlled, tuck your chin, and engage your torso, using your core instead of your neck. \n" +
                     "3.Squeeze your glutes to maintain a horizontal lower body. \n" +
@@ -252,7 +283,11 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initiera ViewModel
-        workoutViewModel = ViewModelProvider(this).get(WorkoutViewModel::class.java)
+        workoutViewModel = ViewModelProvider(requireActivity())[WorkoutViewModel::class.java]
+        profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+
+        // Ladda användardata från Firestore
+        profileViewModel.loadProfile()
 
         // Observera favoriteStatus LiveData för att uppdatera UI
         workoutViewModel.favoriteStatus.observe(viewLifecycleOwner) { status ->
@@ -262,6 +297,7 @@ class WorkoutFragment : Fragment() {
         // Hämta träningsnamn och beskrivning från användargränssnittet
         val workoutName = binding.workoutName.text.toString()
         val workoutDescription = binding.workoutDescription.text.toString()
+
 
         binding.imageButtonFavorite.setOnClickListener {
             val workoutName = binding.workoutName.text.toString()
@@ -296,15 +332,42 @@ class WorkoutFragment : Fragment() {
             }
 
             // Spara favorit med bildens resurs-ID
-            workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId))
+            workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue))
 
             // Ändra hjärtikonen till röd
             binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
         }
+
+        // När användaren startar träningspasset
+        binding.startTimerBtn.setOnClickListener {
+            workoutViewModel.startWorkout()
+            Toast.makeText(requireContext(), "Training started!", Toast.LENGTH_SHORT).show()
+        }
+
+        // När användaren avslutar träningspasset
+        binding.stopTimerBtn.setOnClickListener {
+            profileViewModel.weight.observe(viewLifecycleOwner) { weightStr ->
+                val userWeight = weightStr.toDoubleOrNull() ?: 75.0
+                val summary = workoutViewModel.endWorkout(userWeight, metValue)
+                showWorkoutSummary(summary)
+            }
+        }
+
+
+    }
+
+    // Visa sammanfattning av träningen
+    private fun showWorkoutSummary(summary: WorkoutSummary) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Training summary")
+            .setMessage("Time: ${summary.duration} min\nCalories: ${summary.calories.toInt()} kcal")
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

@@ -75,4 +75,3 @@ class WorkoutViewModel : ViewModel() {
 
     // Data-klass för att hålla sammanfattning av träningspasset
     data class WorkoutSummary(val duration: Int, val calories: Double)
-git

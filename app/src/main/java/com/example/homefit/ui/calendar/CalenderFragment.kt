@@ -81,9 +81,7 @@ class CalenderFragment : Fragment() {
             .collection("exercisesList")
             .add(exerciseData)
             .addOnSuccessListener {
-                textViewExercises.text = "Exercise saved: $exercise"
                 editTextExercise.text.clear()
-                Toast.makeText(requireContext(), "Exercise saved!", Toast.LENGTH_SHORT).show()
                 loadExercise(selectedDate) // Ladda om övningarna för att visa den nya övningen
             }
             .addOnFailureListener {

@@ -17,6 +17,8 @@ import com.example.homefit.databinding.FragmentWorkoutBinding
 import com.example.homefit.ui.data.WorkoutData
 import com.example.homefit.ui.profile.ProfileViewModel
 import com.example.homefit.ui.workout.WorkoutViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class WorkoutFragment : Fragment() {
     private var _binding: FragmentWorkoutBinding? = null
@@ -289,53 +291,64 @@ class WorkoutFragment : Fragment() {
         // Ladda användardata från Firestore
         profileViewModel.loadProfile()
 
-        // Observera favoriteStatus LiveData för att uppdatera UI
+        // Observera favoriteStatus LiveData för att visa Toast
         workoutViewModel.favoriteStatus.observe(viewLifecycleOwner) { status ->
-            Toast.makeText(requireContext(), status, Toast.LENGTH_SHORT).show()
+            if (status != null) {
+                Toast.makeText(context, status, Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         // Hämta träningsnamn och beskrivning från användargränssnittet
         val workoutName = binding.workoutName.text.toString()
         val workoutDescription = binding.workoutDescription.text.toString()
 
+        // Kontrollera om övningen redan är sparad som favorit
+        checkIfFavorite(workoutName)
 
         binding.imageButtonFavorite.setOnClickListener {
-            val workoutName = binding.workoutName.text.toString()
-            val workoutDescription = binding.workoutDescription.text.toString()
-            val workoutImageResId = when (args.Workout) {
-                1 -> R.drawable.dips2
-                2 -> R.drawable.armcirlces1
-                3 -> R.drawable.chatauranga2
-                4 -> R.drawable.wallangel2
-                5 -> R.drawable.armlateralraises2
-                6 -> R.drawable.squat
-                7 -> R.drawable.splitsquats2
-                8 -> R.drawable.glutebridge2
-                9 -> R.drawable.sidelunge
-                10 -> R.drawable.calfraises2
-                11 -> R.drawable.pushups2
-                12 -> R.drawable.widepushups2
-                13 -> R.drawable.burpees2
-                14 -> R.drawable.inclinepushup2
-                15 -> R.drawable.declinepushup2
-                16 -> R.drawable.superman2
-                17 -> R.drawable.goodmorning2
-                18 -> R.drawable.reverseplank
-                19 -> R.drawable.cat
-                20 -> R.drawable.reverseflys2
-                21 -> R.drawable.plank
-                22 -> R.drawable.crunches2
-                23 -> R.drawable.bcrunches2
-                24 -> R.drawable.legraises2
-                25 -> R.drawable.heeltap1
-                else -> R.drawable.default_workout_image // Fallback om inget matchar
+            val isFavorite = binding.imageButtonFavorite.tag == "favorite"
+
+            if (isFavorite) {
+                // Ta bort favoriten
+                removeFavorite(workoutName)
+                binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+                binding.imageButtonFavorite.tag = "not_favorite"
+            } else {
+                // Spara favoriten
+                val workoutImageResId = when (args.Workout) {
+                    1 -> R.drawable.dips2
+                    2 -> R.drawable.armcirlces1
+                    3 -> R.drawable.chatauranga2
+                    4 -> R.drawable.wallangel2
+                    5 -> R.drawable.armlateralraises2
+                    6 -> R.drawable.squat
+                    7 -> R.drawable.splitsquats2
+                    8 -> R.drawable.glutebridge2
+                    9 -> R.drawable.sidelunge
+                    10 -> R.drawable.calfraises2
+                    11 -> R.drawable.pushups2
+                    12 -> R.drawable.widepushups2
+                    13 -> R.drawable.burpees2
+                    14 -> R.drawable.inclinepushup2
+                    15 -> R.drawable.declinepushup2
+                    16 -> R.drawable.superman2
+                    17 -> R.drawable.goodmorning2
+                    18 -> R.drawable.reverseplank
+                    19 -> R.drawable.cat
+                    20 -> R.drawable.reverseflys2
+                    21 -> R.drawable.plank
+                    22 -> R.drawable.crunches2
+                    23 -> R.drawable.bcrunches2
+                    24 -> R.drawable.legraises2
+                    25 -> R.drawable.heeltap1
+                    else -> R.drawable.default_workout_image // Fallback om inget matchar
+                }
+
+                workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue))
+                binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
+                binding.imageButtonFavorite.tag = "favorite"
             }
-
-            // Spara favorit med bildens resurs-ID
-            workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue))
-
-            // Ändra hjärtikonen till röd
-            binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
         }
 
         // När användaren startar träningspasset
@@ -352,8 +365,59 @@ class WorkoutFragment : Fragment() {
                 showWorkoutSummary(summary)
             }
         }
+    }
+    private fun checkIfFavorite(workoutName: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            Log.e("WorkoutFragment", "User not logged in.")
+            return
+        }
 
+        val db = FirebaseFirestore.getInstance()
 
+        // Kontrollera om övningen finns i användarens favoriter
+        db.collection("users").document(userId)
+            .collection("favorites")
+            .document(workoutName)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    // Om övningen finns i favoriter, sätt hjärtat till rött
+                    binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
+                    binding.imageButtonFavorite.tag = "favorite"
+                } else {
+                    // Annars, sätt hjärtat till ofyllt
+                    binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_border_24)
+                    binding.imageButtonFavorite.tag = "not_favorite"
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("WorkoutFragment", "Error checking favorite status", e)
+            }
+    }
+
+    private fun removeFavorite(workoutName: String) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            Log.e("WorkoutFragment", "User not logged in.")
+            return
+        }
+
+        val db = FirebaseFirestore.getInstance()
+
+        // Ta bort favoriten från Firestore
+        db.collection("users").document(userId)
+            .collection("favorites")
+            .document(workoutName)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("WorkoutFragment", "Removed favorite: $workoutName")
+                Toast.makeText(requireContext(), "Removed from favorites", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e("WorkoutFragment", "Error removing favorite", e)
+                Toast.makeText(requireContext(), "Failed to remove favorite: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     // Visa sammanfattning av träningen

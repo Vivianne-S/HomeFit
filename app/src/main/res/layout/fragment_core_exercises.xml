@@ -1,296 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.categories.CategoriesFragment"
     android:background="@drawable/app_background"
-    android:orientation="vertical"
-    >
+    tools:context=".ui.categories.CategoriesFragment">
 
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:padding="16dp">
 
-        <!-- AppBarLayout med Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00A45050"
-            app:titleTextColor="@android:color/black">
-        </androidx.appcompat.widget.Toolbar>
+            android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/plank_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_plank"
-                    android:src="@drawable/plank"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/app_background"
+                android:layout_gravity="center"
+                android:elevation="4dp"
+                app:titleTextColor="@android:color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <TextView
-                    android:id="@+id/tv_plank"
-                    android:text="Plank"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/arrow_arms"
-                    android:layout_gravity="center_vertical"
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    android:text="@string/toolbar_title_core_exercises"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </androidx.appcompat.widget.Toolbar>
 
-            </LinearLayout>
+            <Space android:layout_width="match_parent" android:layout_height="20dp"/>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crunches_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Plank -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/plank_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_crunches"
-                    android:src="@drawable/crunches1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_crunches"
-                    android:text="Crunches"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_legs"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_plank"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/plank"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_plank"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_plank"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_arms"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bicyclecrunches_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Crunches -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crunches_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_bicyclecrunches"
-                    android:src="@drawable/crunches2"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_bicyclecrunches"
-                    android:text="Bicycle Crunches"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_chest"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_crunches"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/crunches1"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_crunches"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_crunches"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_legs"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/legraises_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Bicycle Crunches -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bicyclecrunches_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_legraises"
-                    android:src="@drawable/legraises2"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_legraises"
-                    android:text="Leg Raises"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_backexercise"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_bicyclecrunches"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/crunches2"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_bicyclecrunches"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_bicycle_crunches"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_chest"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/heeltaps_cardview"
-            app:layout_constraintTop_toTopOf="parent"
-            android:paddingTop="20dp"
-            app:cardCornerRadius="15dp"
-            android:backgroundTint="#CFFFA7"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <LinearLayout
+            <!-- Leg Raises -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/legraises_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
-                <ImageView
-                    android:id="@+id/image_heeltaps"
-                    android:src="@drawable/heeltap1"
-                    android:layout_width="50dp"
-                    android:layout_height="80dp"
-                    />
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-                <TextView
-                    android:id="@+id/tv_heeltaps"
-                    android:text="Heel Taps"
-                    android:textStyle="bold"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:textSize="15sp" />
+                    android:padding="12dp">
 
-                <ImageView
-                    android:id="@+id/arrow_core"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/arrow_right"/>
+                    <ImageView
+                        android:id="@+id/image_legraises"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/legraises2"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_legraises"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_leg_raises"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
 
+                    <ImageView
+                        android:id="@+id/arrow_backexercise"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <!-- Heel Taps -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/heeltaps_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/image_heeltaps"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/heeltap1"/>
+
+                    <TextView
+                        android:id="@+id/tv_heeltaps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:text="@string/exercise_heel_taps"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/arrow_core"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow_right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

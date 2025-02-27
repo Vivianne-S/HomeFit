@@ -35,12 +35,12 @@ class WorkoutViewModel : ViewModel() {
             .collection("favorites")
             .document(workoutData.name)  // Använd övningens namn som dokument-ID
             .set(workoutData)  // Spara hela WorkoutData-objektet
-            .addOnSuccessListener {
+           /* .addOnSuccessListener {
                 _favoriteStatus.value = "Exercise saved to favorites"
             }
             .addOnFailureListener { e ->
                 _favoriteStatus.value = "Failed to save exercise: ${e.message}"
-            }
+            }*/
     }
 
     // Startar en träningssession genom att spara starttiden

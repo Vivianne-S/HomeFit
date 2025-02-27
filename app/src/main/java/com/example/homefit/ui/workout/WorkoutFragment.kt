@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,7 +14,6 @@ import com.example.homefit.R
 import com.example.homefit.databinding.FragmentWorkoutBinding
 import com.example.homefit.ui.data.WorkoutData
 import com.example.homefit.ui.profile.ProfileViewModel
-import com.example.homefit.ui.workout.WorkoutViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -195,6 +192,7 @@ class WorkoutFragment : Fragment() {
         // Hämta träningsnamn och beskrivning från användargränssnittet
         val workoutName = binding.workoutName.text.toString()
         val workoutDescription = binding.workoutDescription.text.toString()
+        val workoutNr = args.Workout
 
         // Kontrollera om övningen redan är sparad som favorit
         checkIfFavorite(workoutName)
@@ -238,7 +236,7 @@ class WorkoutFragment : Fragment() {
                     else -> R.drawable.default_workout_image // Fallback om inget matchar
                 }
 
-                workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue))
+                workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue, workoutNr))
                 binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
                 binding.imageButtonFavorite.tag = "favorite"
             }

@@ -154,6 +154,10 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.homefit.ui.favorites.FavoritesFragment"
         android:label="Mina Favoriter"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_Workout_Fragment"
+            app:destination="@id/Workout_Fragment" />
+    </fragment>
 
 </navigation>

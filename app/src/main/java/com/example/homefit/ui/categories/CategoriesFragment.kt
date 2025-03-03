@@ -29,14 +29,6 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /*val exerciseType = arguments?.getString("exerciseType")
-        val layoutId = when (exerciseType) {
-            "arms" -> R.layout.fragment_arms_exercises
-            "back" -> R.layout.fragment_back_exercises
-            // Lägg till fler fall här
-            else -> R.layout.fragment_arms_exercises
-            //inflater.inflate(layoutId, container, false)
-        }*/
         _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,6 +45,7 @@ class CategoriesFragment : Fragment() {
 
         //clicklistener for Arms Category
         cardViewArms.setOnClickListener {
+            //This is used to Navigate to the next Fragment which in this case is armExerciseFragment
             findNavController().navigate(R.id.action_categoriesFragment_to_armExercisesFragment)
         }
 

@@ -45,20 +45,22 @@
             <Space android:layout_width="match_parent" android:layout_height="20dp"/>
 
             <!-- Superman -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/superman_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -66,7 +68,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/superman2"/>
+                        android:src="@drawable/superman2" />
 
                     <TextView
                         android:id="@+id/tv_superman"
@@ -78,31 +80,33 @@
                         android:text="@string/exercise_superman"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_arms"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Good Morning -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/goodmorning_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -110,7 +114,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/goodmorning2"/>
+                        android:src="@drawable/goodmorning2" />
 
                     <TextView
                         android:id="@+id/tv_goodmorning"
@@ -122,31 +126,33 @@
                         android:text="@string/exercise_good_morning"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_legs"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+           </com.google.android.material.card.MaterialCardView>
 
             <!-- Reverse Plank -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/reverseplank_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -154,7 +160,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/reverseplank"/>
+                        android:src="@drawable/reverseplank" />
 
                     <TextView
                         android:id="@+id/tv_reverseplank"
@@ -166,31 +172,33 @@
                         android:text="@string/exercise_reverse_plank"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_chest"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+           </com.google.android.material.card.MaterialCardView>
 
             <!-- Cat Cow -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/catcow_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -198,7 +206,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/cat"/>
+                        android:src="@drawable/cat" />
 
                     <TextView
                         android:id="@+id/tv_catcow"
@@ -210,31 +218,33 @@
                         android:text="@string/exercise_cat_cow"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_backexercise"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+           </com.google.android.material.card.MaterialCardView>
 
             <!-- Reverse Flys -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/reverseflys_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -242,7 +252,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/reverseflys2"/>
+                        android:src="@drawable/reverseflys2" />
 
                     <TextView
                         android:id="@+id/tv_reverse_flys"
@@ -254,15 +264,15 @@
                         android:text="@string/exercise_reverse_flys"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_core"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+           </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>

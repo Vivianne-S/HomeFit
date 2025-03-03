@@ -43,6 +43,18 @@ class WorkoutViewModel : ViewModel() {
             }*/
     }
 
+    // beräkna i sekunder/minuter
+    private fun formatDuration(durationInSeconds: Int): String {
+        val minutes = durationInSeconds / 60
+        val seconds = durationInSeconds % 60
+
+        return if (minutes > 0) {
+            "$minutes min och $seconds sec"
+        } else {
+            "$seconds sec"
+        }
+    }
+
     // Startar en träningssession genom att spara starttiden
     fun startWorkout() {
         startTime = System.currentTimeMillis()
@@ -52,12 +64,14 @@ class WorkoutViewModel : ViewModel() {
     fun endWorkout(weightKg: Double, metValue: Double): WorkoutSummary {
         endTime = System.currentTimeMillis()
 
-        // Beräknar träningens längd i minuter
-        val durationInMinutes = ((endTime - startTime) / 1000.0 / 60).toInt() // Omvandla till minuter
+        // Beräknar träningens längd i sekunder
+        val durationInSeconds = ((endTime - startTime) / 1000).toInt() // Omvandla till sekunder
 
-        val caloriesBurned = calculateCalories(durationInMinutes, weightKg, metValue)
+        val caloriesBurned = calculateCalories(durationInSeconds, weightKg, metValue)
 
-        return WorkoutSummary(durationInMinutes, caloriesBurned)
+        val formattedDuration = formatDuration(durationInSeconds) // Formaterad tid
+
+        return WorkoutSummary(formattedDuration, caloriesBurned)
     }
 
     /**
@@ -68,10 +82,10 @@ class WorkoutViewModel : ViewModel() {
      * @return Antal kalorier som förbränts
      */
     private fun calculateCalories(duration: Int, weightKg: Double, metValue: Double): Double {
-        return (metValue * weightKg * 3.5 / 200) * duration
+        return (metValue * weightKg * 3.5 / 200) * (duration / 60.0)
     }
 
 }
 
     // Data-klass för att hålla sammanfattning av träningspasset
-    data class WorkoutSummary(val duration: Int, val calories: Double)
+    data class WorkoutSummary(val duration: String, val calories: Double)

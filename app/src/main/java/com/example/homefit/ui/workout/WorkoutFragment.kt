@@ -312,11 +312,12 @@ class WorkoutFragment : Fragment() {
             }
     }
 
+
     // Visa sammanfattning av träningen
     private fun showWorkoutSummary(summary: WorkoutSummary) {
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.training_summary)
-            .setMessage("${getString(R.string.time)}: ${summary.duration} min\n${getString(R.string.calories)}: ${summary.calories.toInt()} kcal")
+            .setMessage("${getString(R.string.time)}: ${summary.duration} \n${getString(R.string.calories)}: ${summary.calories.toInt()} kcal")
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }

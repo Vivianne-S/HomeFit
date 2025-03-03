@@ -7,6 +7,6 @@ data class WorkoutData(
     val description: String = "",
     val caloriesBurned: Int = 0,
     val imageResId: Int = R.drawable.default_workout_image, // Standardbild som fallback
+    val workoutNr: Int, // Used to know which workout it is
     val metValue: Double = 1.0, // Lägg till MET-värde, standardvärde 1.0
-    val workoutNr: Int = 1,
 )

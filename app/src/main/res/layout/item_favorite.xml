@@ -14,11 +14,12 @@
         android:id="@+id/imageViewWorkout"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
-        android:scaleType="centerCrop"
+        android:clickable="true"
         android:contentDescription="Workout Image"
-        android:src="@drawable/default_workout_image"
-        android:layout_gravity="center_vertical" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_workout_image" />
 
     <LinearLayout
         android:layout_width="0dp"

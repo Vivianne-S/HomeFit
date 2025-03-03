@@ -5,8 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homefit.R
@@ -20,6 +23,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var favoritesAdapter: FavoritesAdapter
     private lateinit var tvNoFavorites: TextView
     private val favoritesList: MutableList<WorkoutData> = mutableListOf()
+    lateinit var action : NavDirections
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +38,16 @@ class FavoritesFragment : Fragment() {
 
         // Ställer in LayoutManager och Adapter för RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        favoritesAdapter = FavoritesAdapter(favoritesList) { workout ->
+        favoritesAdapter = FavoritesAdapter(favoritesList,
+        onRemoveFavorite = { workout ->
             removeFavorite(workout) // Sätt en klicklistener för att ta bort favoriten
-        }
+        },
+        onImageClick = { workout -> // ClickListener for the image
+            // This is used to go over to the Workout fragment and sending the data from workoutNr
+            // To know which workout the favorite is and going to the right one accordingly
+            action = FavoritesFragmentDirections.actionFavoritesFragmentToWorkoutFragment(workout.workoutNr)
+            findNavController().navigate(action)
+        })
         recyclerView.adapter = favoritesAdapter
 
         // Hämtar favoriter från Firestore
@@ -69,7 +80,7 @@ class FavoritesFragment : Fragment() {
                     val description = document.getString("description") ?: ""
                     val calories = document.getLong("caloriesBurned")?.toInt() ?: 0
                     val imageResId = document.getLong("imageResId")?.toInt() ?: R.drawable.default_workout_image
-                    val workoutNr = document.getLong("workoutNumber")?.toInt() ?: 0
+                    val workoutNr = document.getLong("workoutNr")?.toInt() ?: 0
 
                     // Skapa ett WorkoutData-objekt med hämtad information
                     val workoutData = WorkoutData(
@@ -77,7 +88,7 @@ class FavoritesFragment : Fragment() {
                         description,
                         calories,
                         imageResId,
-                        workoutNr.toDouble()
+                        workoutNr
                     )
 
                     // Lägg till övningen i listan

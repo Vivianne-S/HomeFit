@@ -26,6 +26,7 @@ class WorkoutFragment : Fragment() {
     private lateinit var workoutViewModel: WorkoutViewModel
     private lateinit var profileViewModel: ProfileViewModel
 
+    //This is where the code learns how to reach the Argument
     val args : WorkoutFragmentArgs by navArgs()
 
     companion object {
@@ -41,8 +42,11 @@ class WorkoutFragment : Fragment() {
         val imgView = binding.imageViewWorkout
         val wrkDescription = binding.workoutDescription
         val wrkName = binding.workoutName
+        //And This is where it initializes it
         val workoutNr = args.Workout
 
+        //This is where the code reads the argument sent from the earlier Fragment and uses said
+        //value to know which workout it should be showing to the viewer
         if (workoutNr == 1) {
             imgView.setImageResource(R.drawable.dips2)
             wrkName.text = getString(R.string.exercise_chair_dips)
@@ -236,7 +240,7 @@ class WorkoutFragment : Fragment() {
                     else -> R.drawable.default_workout_image // Fallback om inget matchar
                 }
 
-                workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, metValue, workoutNr))
+                workoutViewModel.saveFavorite(WorkoutData(workoutName, workoutDescription, 0, workoutImageResId, workoutNr, metValue))
                 binding.imageButtonFavorite.setImageResource(R.drawable.baseline_favorite_24)
                 binding.imageButtonFavorite.tag = "favorite"
             }

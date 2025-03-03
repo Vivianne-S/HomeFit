@@ -47,6 +47,8 @@ class ArmsExercisesFragment : Fragment() {
 
         //clicklistener for Arms Category
         cardViewDips.setOnClickListener {
+            //This is used to move over to the WorkoutFragment using the value as an indicator which workout it is
+            //This is the same for every ClickListener going to the WorkoutFragment
             action = ArmsExercisesFragmentDirections.actionArmExercisesFragmentToWorkoutFragment(1)
             findNavController().navigate(action)
         }

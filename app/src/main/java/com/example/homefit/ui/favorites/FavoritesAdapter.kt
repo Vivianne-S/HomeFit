@@ -1,5 +1,6 @@
 package com.example.homefit.ui.favorites
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,8 @@ import com.example.homefit.R
 
 class FavoritesAdapter(
     private val workoutDataList: MutableList<WorkoutData>, // Lista med favoritövningar
-    private val onRemoveFavorite: (WorkoutData) -> Unit // Callback för att ta bort en favorit
+    private val onRemoveFavorite: (WorkoutData) -> Unit, // Callback för att ta bort en favorite
+    private val onImageClick:(WorkoutData) -> Unit
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoriteViewHolder>() {
 
     // Skapar en ny ViewHolder
@@ -39,7 +41,12 @@ class FavoritesAdapter(
             binding.tvWorkoutDescription.text = workoutData.description
 
             // Visa bilden med hjälp av resurs-ID
-           binding.imageViewWorkout.setImageResource(workoutData.imageResId)
+            binding.imageViewWorkout.setImageResource(workoutData.imageResId)
+
+            // Handles the ClickListener for the ImageView
+            binding.imageViewWorkout.setOnClickListener {
+                onImageClick(workoutData)
+            }
 
             // Hantera klick på "ta bort favorit"-knappen
             binding.btnRemoveFavorite.setOnClickListener {

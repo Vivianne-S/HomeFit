@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,41 +24,45 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/app_background"
                 android:layout_gravity="center"
+                android:background="@drawable/app_background"
                 android:elevation="4dp"
-                app:titleTextColor="@android:color/white"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleTextColor="@android:color/white">
 
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/categories_title"
                     android:textColor="@android:color/white"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:gravity="center"/>
+                    android:textStyle="bold" />
             </androidx.appcompat.widget.Toolbar>
 
-            <Space android:layout_width="match_parent" android:layout_height="20dp"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
             <!-- Categories -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/arms_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="25dp">
 
                     <ImageView
@@ -67,7 +70,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/arms_category_image"/>
+                        android:src="@drawable/arms_category_image" />
 
                     <TextView
                         android:id="@+id/tv_category_arms"
@@ -79,32 +82,34 @@
                         android:text="@string/category_arms"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_arms"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Legs -->
-            <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/legs_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -112,7 +117,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/legs_category_img"/>
+                        android:src="@drawable/legs_category_img" />
 
                     <TextView
                         android:id="@+id/tv_category_legs"
@@ -124,32 +129,34 @@
                         android:text="@string/category_legs"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_legs"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Chest -->
-            <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/chest_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -157,7 +164,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/chest_category_image"/>
+                        android:src="@drawable/chest_category_image" />
 
                     <TextView
                         android:id="@+id/tv_category_chest"
@@ -169,32 +176,34 @@
                         android:text="@string/category_chest"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_chest"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Core -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/core_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -202,7 +211,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/core_categories_image"/>
+                        android:src="@drawable/core_categories_image" />
 
                     <TextView
                         android:id="@+id/tv_category_core"
@@ -214,31 +223,33 @@
                         android:text="@string/category_core"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_core"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Back -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+                android:focusable="true"
                 android:id="@+id/back_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="12dp">
 
                     <ImageView
@@ -246,7 +257,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/back_categories_image"/>
+                        android:src="@drawable/back_categories_image" />
 
                     <TextView
                         android:id="@+id/tv_category_back"
@@ -258,16 +269,16 @@
                         android:text="@string/category_back"
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/arrow_back"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/arrow_right"/>
+                        android:src="@drawable/arrow_right" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>

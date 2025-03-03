@@ -1,7 +1,9 @@
 package com.example.homefit.ui.signin
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +15,21 @@ import androidx.navigation.fragment.findNavController
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentSignInBinding
 import com.example.homefit.ui.viewmodelauth.AuthViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.GoogleAuthProvider
+
 class SignInFragment : Fragment() {
 
     private lateinit var authViewModel: AuthViewModel
     private var binding: FragmentSignInBinding? = null
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    private val RC_SIGN_IN = 9001  // Request code för Google Sign-In
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +38,14 @@ class SignInFragment : Fragment() {
         // Initialisera ViewModel
         authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         binding = FragmentSignInBinding.inflate(inflater, container, false)
+
+        // Google Sign-In setup
+        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("164673616717-bvlt3utj96gufkaqbbkk2q09t4peh7re.apps.googleusercontent.com")  // Replace with your actual client ID
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions)
 
         // Kolla om användaren redan är inloggad
         authViewModel.checkIfUserIsLoggedIn()
@@ -49,6 +70,12 @@ class SignInFragment : Fragment() {
                 // Försök logga in användaren
                 authViewModel.signIn(email, password)
             }
+        }
+
+        // Klicklyssnare för Google Sign-In
+        binding?.btnSignInGoogle?.setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
         // Navigera till signUpFragment
@@ -76,6 +103,22 @@ class SignInFragment : Fragment() {
         })
 
         return binding?.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                account?.idToken?.let { idToken ->
+                    authViewModel.signInWithGoogle(idToken)
+                }
+            } catch (e: ApiException) {
+                Log.e("SignInFragment", "Google sign-in failed", e)
+                Toast.makeText(requireContext(), "Google sign-in failed", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     // Hantera rensning av binding när fragmentet förstörs och förhindra minnesläckor

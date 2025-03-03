@@ -91,6 +91,7 @@
     <string name="user_reset_password_buttontext">Reset Password</string>
     <string name="user_back_to_sign_in_linktext">Back to Sign In</string>
     <string name="hint_email">Email</string>
+    <string name="user_signin_google">Sign in with Google Account</string>
     <string name="hint_password">Password</string>
     <string name="tap_the_screen_to_continue">Tap the Screen to Continue</string>
     <string name="user_age_input">Age</string>
@@ -144,6 +145,10 @@
     <string name="enter_exercise_hint">Enter completed Exercise:</string>
     <string name="save_exercise_button">Save Exercise</string>
     <string name="exercises_of_day">Exercises for the day:</string>
+
+    <!-- Google client Strings -->
+    <string name="default_web_client_id">164673616717-bvlt3utj96gufkaqbbkk2q09t4peh7re.apps.googleusercontent.com</string>
+
 
 
 </resources>

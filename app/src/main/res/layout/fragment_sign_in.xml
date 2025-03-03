@@ -93,13 +93,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
+    <!-- Sign In with Google Button -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSignInGoogle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="@color/logoblue"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/user_signin_google"
+        android:textColor="@android:color/white"
+        app:cornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
+
     <!-- Sign Up Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/logoblue"
         android:clickable="true"
         android:focusable="true"
@@ -115,7 +134,7 @@
         android:id="@+id/btnForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="44dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/user_forgot_password_linktext"

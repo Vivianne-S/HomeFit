@@ -38,11 +38,8 @@ class FavoritesAdapter(
             // Sätt övningens beskrivning
             binding.tvWorkoutDescription.text = workoutData.description
 
-            // Sätt antal förbrända kalorier
-            binding.tvCalories.text = "${workoutData.caloriesBurned} kcal"
-
             // Visa bilden med hjälp av resurs-ID
-            binding.imageViewWorkout.setImageResource(workoutData.imageResId)
+           binding.imageViewWorkout.setImageResource(workoutData.imageResId)
 
             // Hantera klick på "ta bort favorit"-knappen
             binding.btnRemoveFavorite.setOnClickListener {

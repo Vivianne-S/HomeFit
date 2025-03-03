@@ -47,7 +47,12 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.airbnb.android:lottie:5.0.3")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.play.services.base)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")

@@ -139,7 +139,7 @@
 
 
 
-    <!-- Favorite Fragment: Profilsidan -->
+    <!-- Calender Fragment: Kalender Sidan  -->
     <fragment
         android:id="@+id/calenderFragment"
         android:name="com.example.homefit.ui.calendar.CalenderFragment"

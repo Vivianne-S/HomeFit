@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.homefit.R
 import com.example.homefit.databinding.FragmentWorkoutBinding
@@ -23,8 +26,12 @@ class WorkoutFragment : Fragment() {
     private var metValue: Double = 0.0
 
     // ViewModel-instans
-    private lateinit var workoutViewModel: WorkoutViewModel
     private lateinit var profileViewModel: ProfileViewModel
+
+
+    val workoutViewModel: WorkoutViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+    }
 
     //This is where the code learns how to reach the Argument
     val args : WorkoutFragmentArgs by navArgs()
@@ -180,11 +187,35 @@ class WorkoutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initiera ViewModel
-        workoutViewModel = ViewModelProvider(requireActivity())[WorkoutViewModel::class.java]
         profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         // Ladda användardata från Firestore
         profileViewModel.loadProfile()
+
+
+        // Hämta UI-komponenter för timer från binding
+        val timerTextView = _binding?.timerTextview
+        val startButton = _binding?.startTimerBtn
+        val stopButton = _binding?.stopTimerBtn
+
+        // Observera träningsstatus
+        workoutViewModel.isWorkoutActive.observe(viewLifecycleOwner) { isActive ->
+            startButton?.text = if (isActive) "Stop" else "Start"
+        }
+
+        // Observera tid från ViewModel och uppdatera UI
+        workoutViewModel.elapsedTime.observe(viewLifecycleOwner) { time ->
+            timerTextView?.text = time
+        }
+
+        // Starta och stoppa träning när knapparna klickas
+        startButton?.setOnClickListener {
+            workoutViewModel.startWorkout()
+        }
+
+        stopButton?.setOnClickListener {
+            workoutViewModel.stopWorkout()
+        }
 
         // Observera favoriteStatus LiveData för att visa Toast
         workoutViewModel.favoriteStatus.observe(viewLifecycleOwner) { status ->
@@ -262,6 +293,12 @@ class WorkoutFragment : Fragment() {
         }
     }
 
+    // Livscykelmetod för att förhindra minnesläckor
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun checkIfFavorite(workoutName: String) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId == null) {
@@ -326,8 +363,4 @@ class WorkoutFragment : Fragment() {
             .show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

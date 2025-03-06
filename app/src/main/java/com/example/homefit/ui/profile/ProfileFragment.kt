@@ -101,7 +101,7 @@ class ProfileFragment : Fragment() {
 
     private fun updateBarChart(weight: String) {
         val weightValue = weight.toFloatOrNull() ?: return
-        val goalValue = viewModel.goal.value?.toFloatOrNull() ?: 0f  // Om goal är null sätt till 0
+        val goalValue = viewModel.goal.value?.toFloatOrNull() ?: 0f
 
         // Beräkna hur många kg som är kvar till målet
         val remainingWeight = weightValue - goalValue

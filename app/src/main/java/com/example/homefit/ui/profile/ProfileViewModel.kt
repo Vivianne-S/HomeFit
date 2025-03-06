@@ -44,7 +44,7 @@ class ProfileViewModel : ViewModel() {
                     _age.value = document.getString("age") ?: ""
                     _gender.value = document.getString("gender") ?: ""
                     _weight.value = document.getString("weight") ?: ""
-                    _goal.value = document.getString("goal")  // Nu kan goal vara null om det inte är angivet
+                    _goal.value = document.getString("goal")  //
                     _length.value = document.getString("length") ?: ""
 
                     Log.d("ProfileViewModel", "Profil laddad: ${document.data}")

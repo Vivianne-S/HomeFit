@@ -11,4 +11,4 @@ Tech & Tools
 	•	Figma – UI/UX design and interactive prototype
 	•	Trello (Scrum Board) – Project planning & sprint management
 	•	GitHub – Version control and collaboration
-	•	(Optionally add your dev stack later: SwiftUI / Kotlin / Firebase / etc.)
+	•	Firebase - For Auth and Personal workout with tracking
